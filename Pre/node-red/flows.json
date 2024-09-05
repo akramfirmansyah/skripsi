@@ -90,37 +90,6 @@
         "h": 162
     },
     {
-        "id": "320bdff93c019b07",
-        "type": "mqtt-broker",
-        "name": "MQTT Broker Container",
-        "broker": "mqtt-broker",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
         "id": "a0c6bd21a651f905",
         "type": "influxdb",
         "hostname": "127.0.0.1",
@@ -208,37 +177,6 @@
         "className": "",
         "visible": "true",
         "disabled": "false"
-    },
-    {
-        "id": "d766c78ac2ce49a6",
-        "type": "mqtt-broker",
-        "name": "AWS Broker",
-        "broker": "18.139.208.170",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
     },
     {
         "id": "a7b209c82b79a6cf",
@@ -676,7 +614,7 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Aeroponics",
-        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\n// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nif (msg.topic == \"pumpController\") {\n    context.set('pumpController', msg.payload)\n}\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n// menghitung nilai TDS berdasarkan data dari sensor TDS\ntdsValue = getTDS(Number(arrData.tds), Number(arrData.waterTemperature));\n// menghitung nilai pH berdasarkan data dari sensor pH\nphValue = Number(arrData.ph);\n// menghitung nilai humidity dan air temperature\nhumidity = getDHT(Number(arrData.humidity))\nairTemperature = getDHT(Number(arrData.airTemperature))\n\n// mengambil data pengontrol pompa dari context\npumpController = context.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, tdsValue, maxTDS, minTDS);\n\nresult = [\n    { payload: phValue, topic: \"pH\" },\n    { payload: tdsValue, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: Number(arrData.waterTemperature), topic: \"Water Temperature\" },\n    { payload: airTemperature, topic: \"Air Temperature\" },\n    { payload: humidity, topic: \"Humidity\" },\n    { payload: Number(arrData.fertilizer), topic: \"Fertilizer\" },\n    { payload: Number(arrData.nutrient), topic: \"Nutrient\" },\n    { payload: Number(arrData.fertilizerPumpStatus), topic: \"Fertilizer Pump Status\" },\n    { payload: Number(arrData.nutrientPumpStatus), topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData)},\n    { payload: pumpData},\n]\n\nreturn result;\n\n/**\n * Fungsi untuk menghitung nilai pH\n * \n * @param {number} data\n */\nfunction getPH(data) {\n\n    return data;\n}\n\n/**\n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} waterTemperature\n */\nfunction getTDS(data, waterTemperature) {\n    let tdsValue\n    let volt = data * (5.0 / 1024.0)\n    let K = flow.get('K')\n    let alpha = 0.02\n    let tempCompensation = 1 + alpha * (waterTemperature - 25)\n    tdsValue = K * volt * 1000 * tempCompensation;\n\n    return Number(tdsValue.toFixed(0))\n}\n\nfunction savetoDatabase(data) {\n    for (let key in data) {\n        if (typeof data[key] === \"string\") {\n            data[key] = Number(data[key]);\n        }\n    }\n\n    return data\n}\n\n/**\n * Menghitung nilai Humidity dan Air Temperature\n * \n * @param {number} data\n * \n * @return {number} value\n */\nfunction getDHT(data) {\n    if(Number.isNaN(data)) {\n        return 0\n    }\n    \n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS) {\n    let setSystem;\n    if (pumpController) {\n        setSystem = \"1|1\";\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump()\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump() {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 4) {\n        return 0;\n    }\n\n    if (diffMinute >= 4 && diffMinute <= 5) {\n        return 1;\n    }\n\n    if (diffMinute > 5) {\n        context.set('setDate', new Date())\n        return 0;\n    }\n}",
+        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\n// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nif (msg.topic == \"pumpController\") {\n    context.set('pumpController', msg.payload)\n}\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n// menghitung nilai TDS berdasarkan data dari sensor TDS\ntdsValue = getTDS(Number(arrData.tds), Number(arrData.waterTemperature));\n// menghitung nilai pH berdasarkan data dari sensor pH\nphValue = Number(arrData.ph);\n// menghitung nilai humidity dan air temperature\nhumidity = getDHT(Number(arrData.humidity))\nairTemperature = getDHT(Number(arrData.airTemperature))\n\n// mengambil data pengontrol pompa dari context\npumpController = context.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, tdsValue, maxTDS, minTDS);\n\nresult = [\n    { payload: phValue, topic: \"pH\" },\n    { payload: tdsValue, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: Number(arrData.waterTemperature), topic: \"Water Temperature\" },\n    { payload: airTemperature, topic: \"Air Temperature\" },\n    { payload: humidity, topic: \"Humidity\" },\n    { payload: Number(arrData.fertilizer), topic: \"Fertilizer\" },\n    { payload: Number(arrData.nutrient), topic: \"Nutrient\" },\n    { payload: Number(arrData.fertilizerPumpStatus), topic: \"Fertilizer Pump Status\" },\n    { payload: Number(arrData.nutrientPumpStatus), topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n    { payload: pumpData },\n]\n\nreturn result;\n\n/**\n * Fungsi untuk menghitung nilai pH\n * \n * @param {number} data\n */\nfunction getPH(data) {\n\n    return data;\n}\n\n/**\n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} waterTemperature\n */\nfunction getTDS(data, waterTemperature) {\n    let tdsValue\n    let volt = data * (5.0 / 1024.0)\n    let K = flow.get('K')\n    let alpha = 0.02\n    let tempCompensation = 1 + alpha * (waterTemperature - 25)\n    tdsValue = K * volt * 1000 * tempCompensation;\n\n    return Number(tdsValue.toFixed(0))\n}\n\nfunction savetoDatabase(data) {\n    for (let key in data) {\n        if (typeof data[key] === \"string\") {\n            data[key] = Number(data[key]);\n        }\n    }\n\n    return data\n}\n\n/**\n * Menghitung nilai Humidity dan Air Temperature\n * \n * @param {number} data\n * \n * @return {number} value\n */\nfunction getDHT(data) {\n    if (Number.isNaN(data)) {\n        return 0\n    }\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS) {\n    let setSystem;\n    if (pumpController) {\n        setSystem = \"1|1\";\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump()\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump() {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 4) {\n        return 0;\n    }\n\n    if (diffMinute >= 4 && diffMinute <= 5) {\n        return 1;\n    }\n\n    if (diffMinute > 5) {\n        context.set('setDate', new Date())\n        return 0;\n    }\n}",
         "outputs": 13,
         "timeout": 0,
         "noerr": 0,
@@ -744,7 +682,8 @@
             "Fertilizer Pump",
             "Nutrient Pump",
             "Save to Database",
-            "Pump Data"
+            "Pump Data",
+            ""
         ]
     },
     {
@@ -1738,8 +1677,8 @@
         "topic": "capture",
         "payload": "iso",
         "payloadType": "date",
-        "x": 190,
-        "y": 1200,
+        "x": 1330,
+        "y": 280,
         "wires": [
             [
                 "2e3fb063f7b0a023"
@@ -1750,7 +1689,7 @@
         "id": "1a5de5988d81b4d1",
         "type": "debug",
         "z": "84358d592de45792",
-        "name": "debug 2",
+        "name": "Print Success",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1759,8 +1698,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 1200,
+        "x": 1960,
+        "y": 280,
         "wires": []
     },
     {
@@ -1784,8 +1723,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 1240,
+        "x": 1330,
+        "y": 320,
         "wires": [
             [
                 "2e3fb063f7b0a023"
@@ -1813,8 +1752,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 200,
-        "y": 1280,
+        "x": 1340,
+        "y": 360,
         "wires": [
             [
                 "2e3fb063f7b0a023"
@@ -1833,8 +1772,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "Auto Capture",
-        "x": 510,
-        "y": 1220,
+        "x": 1650,
+        "y": 320,
         "wires": [
             [
                 "1a5de5988d81b4d1"
@@ -1851,7 +1790,7 @@
         "id": "951122a4f54f7e19",
         "type": "debug",
         "z": "84358d592de45792",
-        "name": "debug 3",
+        "name": "Print Error",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1860,15 +1799,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 1240,
+        "x": 1950,
+        "y": 320,
         "wires": []
     },
     {
         "id": "cf95b82fc73670c1",
         "type": "debug",
         "z": "84358d592de45792",
-        "name": "debug 4",
+        "name": "Print Exec Code",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1877,8 +1816,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 1280,
+        "x": 1960,
+        "y": 360,
         "wires": []
     }
 ]

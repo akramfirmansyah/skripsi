@@ -7,19 +7,6 @@ services:
     volumes:
       - ./node-red:/data
     depends_on:
-      - mqtt-broker
-
-  mqtt-broker:
-    image: eclipse-mosquitto:latest
-    container_name: mqtt-broker
-    # restart: on-failure
-    ports:
-      - "1883:1883"
-      - "9001:9001"
-    volumes:
-      - ./mosquitto/data:/mosquitto/data
-      - ./mosquitto/config/mosquitto.config:/mosquitto/config/mosquitto.conf
-    depends_on:
       - influxdb2
 
   influxdb2:
