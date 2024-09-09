@@ -1,18 +1,32 @@
 services:
   node-red:
-    image: nodered/node-red:latest
+    image: nodered/node-red:latest-20
     container_name: node-red
     ports:
       - "11880:1880"
     volumes:
       - ./node-red:/data
     depends_on:
+      - mosquitto
+
+  # https://medium.com/@tomer.klein/docker-compose-and-mosquitto-mqtt-simplifying-broker-deployment-7aaf469c07ee
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto:/etc/mosquitto
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    depends_on:
       - influxdb2
 
   influxdb2:
-    image: influxdb:latest
+    image: influxdb:2
     container_name: influxdb2
-    # restart: on-failure
+    restart: unless-stopped
     ports:
       - "8086:8086"
     environment:
@@ -24,3 +38,14 @@ services:
     volumes:
       - ./influxdb/data:/var/lib/influxdb2
       - ./influxdb/config:/etc/influxdb2
+
+  portainer:
+    image: portainer/portainer-ce:2.21.0
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - ./portainerData:/data
+      - /var/run/docker.sock:/var/run/docker.sock

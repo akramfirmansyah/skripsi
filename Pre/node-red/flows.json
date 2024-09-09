@@ -19,7 +19,8 @@
             "91be976e9b0e0d02",
             "538bc9c0cdbfc493",
             "72112e25c8525f59",
-            "6d07ecdf31365a93"
+            "6d07ecdf31365a93",
+            "308d5e08709ba4c8"
         ],
         "x": 34,
         "y": 39,
@@ -288,6 +289,37 @@
         "sessionExpiry": ""
     },
     {
+        "id": "95baad91265b5be6",
+        "type": "mqtt-broker",
+        "name": "Mosquitto Broker",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "91be976e9b0e0d02",
         "type": "inject",
         "z": "84358d592de45792",
@@ -323,10 +355,10 @@
         "z": "84358d592de45792",
         "g": "9f88271de0797f5b",
         "name": "Subcribe Test",
-        "topic": "test",
+        "topic": "Test/Aeroponics",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "4fa1a46d10411e6a",
+        "broker": "95baad91265b5be6",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -345,7 +377,7 @@
         "z": "84358d592de45792",
         "g": "9f88271de0797f5b",
         "name": "Publish Test",
-        "topic": "",
+        "topic": "Test/Aeroponics",
         "qos": "0",
         "retain": "",
         "respTopic": "",
@@ -353,7 +385,7 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "4fa1a46d10411e6a",
+        "broker": "95baad91265b5be6",
         "x": 370,
         "y": 80,
         "wires": []
@@ -452,7 +484,7 @@
         "z": "84358d592de45792",
         "g": "0b1defec19e46ef8",
         "name": "Debug InfluxDB data",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -550,10 +582,10 @@
                 "vt": "str"
             }
         ],
-        "repeat": "60",
+        "repeat": "300",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "1",
         "topic": "",
         "payload": "iso",
         "payloadType": "date",
@@ -614,11 +646,11 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Aeroponics",
-        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\n// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nif (msg.topic == \"pumpController\") {\n    context.set('pumpController', msg.payload)\n}\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n// menghitung nilai TDS berdasarkan data dari sensor TDS\ntdsValue = getTDS(Number(arrData.tds), Number(arrData.waterTemperature));\n// menghitung nilai pH berdasarkan data dari sensor pH\nphValue = Number(arrData.ph);\n// menghitung nilai humidity dan air temperature\nhumidity = getDHT(Number(arrData.humidity))\nairTemperature = getDHT(Number(arrData.airTemperature))\n\n// mengambil data pengontrol pompa dari context\npumpController = context.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, tdsValue, maxTDS, minTDS);\n\nresult = [\n    { payload: phValue, topic: \"pH\" },\n    { payload: tdsValue, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: Number(arrData.waterTemperature), topic: \"Water Temperature\" },\n    { payload: airTemperature, topic: \"Air Temperature\" },\n    { payload: humidity, topic: \"Humidity\" },\n    { payload: Number(arrData.fertilizer), topic: \"Fertilizer\" },\n    { payload: Number(arrData.nutrient), topic: \"Nutrient\" },\n    { payload: Number(arrData.fertilizerPumpStatus), topic: \"Fertilizer Pump Status\" },\n    { payload: Number(arrData.nutrientPumpStatus), topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n    { payload: pumpData },\n]\n\nreturn result;\n\n/**\n * Fungsi untuk menghitung nilai pH\n * \n * @param {number} data\n */\nfunction getPH(data) {\n\n    return data;\n}\n\n/**\n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} waterTemperature\n */\nfunction getTDS(data, waterTemperature) {\n    let tdsValue\n    let volt = data * (5.0 / 1024.0)\n    let K = flow.get('K')\n    let alpha = 0.02\n    let tempCompensation = 1 + alpha * (waterTemperature - 25)\n    tdsValue = K * volt * 1000 * tempCompensation;\n\n    return Number(tdsValue.toFixed(0))\n}\n\nfunction savetoDatabase(data) {\n    for (let key in data) {\n        if (typeof data[key] === \"string\") {\n            data[key] = Number(data[key]);\n        }\n    }\n\n    return data\n}\n\n/**\n * Menghitung nilai Humidity dan Air Temperature\n * \n * @param {number} data\n * \n * @return {number} value\n */\nfunction getDHT(data) {\n    if (Number.isNaN(data)) {\n        return 0\n    }\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS) {\n    let setSystem;\n    if (pumpController) {\n        setSystem = \"1|1\";\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump()\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump() {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 4) {\n        return 0;\n    }\n\n    if (diffMinute >= 4 && diffMinute <= 5) {\n        return 1;\n    }\n\n    if (diffMinute > 5) {\n        context.set('setDate', new Date())\n        return 0;\n    }\n}",
+        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\n// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nif (msg.topic == \"pumpController\") {\n    context.set('pumpController', msg.payload)\n}\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n// menghitung nilai TDS berdasarkan data dari sensor TDS\n// tdsValue = getTds(arrData.tds, arrData.waterTemperature);\ntdsValue = arrData.tds\n// menghitung nilai pH berdasarkan data dari sensor pH\nphValue = arrData.ph;\n// menghitung nilai humidity dan air temperature\nhumidity = getDHT(arrData.humidity)\nairTemperature = getDHT(arrData.airTemperature)\n\n// mengambil data pengontrol pompa dari context\npumpController = context.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, tdsValue, maxTDS, minTDS);\n\nresult = [\n    { payload: phValue, topic: \"pH\" },\n    { payload: tdsValue, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: arrData.waterTemperature, topic: \"Water Temperature\" },\n    { payload: airTemperature, topic: \"Air Temperature\" },\n    { payload: humidity, topic: \"Humidity\" },\n    { payload: arrData.fertilizer, topic: \"Fertilizer\" },\n    { payload: arrData.nutrient, topic: \"Nutrient\" },\n    { payload: arrData.fertilizerPumpStatus, topic: \"Fertilizer Pump Status\" },\n    { payload: arrData.nutrientPumpStatus, topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n    { payload: pumpData },\n]\n\nreturn result;\n\n/** \n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} temperature\n*/\nfunction getTds(data, temperature) {\n    // Settings according to Node MCU ESP8266 \n    const kValue = 0.79;\n    const aref = 3.3;\n    const adcRange = 1024;  //setting according to Gravity TDS Master library\n    const tdsFactor = 0.5;\n    let voltage = data / adcRange * aref;\n    let ecValue = ((133.42 * voltage * voltage * voltage) - (255.86 * voltage * voltage) + (857.39 * voltage)) * kValue;\n    let ec = ecValue / (1.0 + 0.02 * (temperature - 25));\n    let tds = ec * tdsFactor;\n    // tds = (1.0374*tds) - 9.5339 \n    return Math.round(tds);\n    // return 1200 + (Math.floor(Math.random() * (30 - 10) + 10)) \n}\n\nfunction savetoDatabase(data) {\n    Object.assign(data, {\n        \"minTds\": flow.get(\"minTDS\"),\n        \"maxTds\": flow.get(\"maxTDS\")\n    })\n\n    return data\n}\n\n/**\n * Mengecek nilai Humidity dan Air Temperature. \n * Jika NaN maka mengembalikan nilai 0, jika tidak maka mengembalikan nilai asli\n * \n * @param {number} data\n * \n * @return {number} value\n */\nfunction getDHT(data) {\n    if (Number.isNaN(data)) {\n        return 0\n    }\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS) {\n    let setSystem;\n    if (pumpController) {\n        setSystem = \"1|1\";\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump()\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump() {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 4) {\n        return 0;\n    }\n\n    if (diffMinute >= 4 && diffMinute <= 5) {\n        return 1;\n    }\n\n    if (diffMinute > 5) {\n        context.set('setDate', new Date())\n        return 0;\n    }\n}",
         "outputs": 13,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('setDate', new Date('2023-06-25T10:00:00'));\ncontext.set('pompController', false);\n// nilai max 800 dan min 600 diatur berdasarkan anjuran dari Pupuk ABMIX\ncontext.set('fertilizerPump', 1);\ncontext.set('setTimeDecrease', new Date('2023-06-25T10:00:00'))\n\n// Set nilai Calibration constant TDS\nflow.set('K', 0.5);",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('setDate', new Date('2023-06-25T10:00:00'));\ncontext.set('pompController', false);\n// nilai max 800 dan min 600 diatur berdasarkan anjuran dari Pupuk ABMIX\ncontext.set('fertilizerPump', 1);\ncontext.set('setTimeDecrease', new Date('2023-06-25T10:00:00'))",
         "finalize": "",
         "libs": [],
         "x": 690,
@@ -682,8 +714,7 @@
             "Fertilizer Pump",
             "Nutrient Pump",
             "Save to Database",
-            "Pump Data",
-            ""
+            "Pump Data"
         ]
     },
     {
@@ -700,15 +731,15 @@
                 "vt": "str"
             }
         ],
-        "repeat": "1",
+        "repeat": "2",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "data",
         "payload": "",
         "payloadType": "str",
-        "x": 180,
-        "y": 440,
+        "x": 140,
+        "y": 260,
         "wires": [
             [
                 "449b5b2e16ce58c0"
@@ -720,17 +751,19 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Dummy Data",
-        "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.floor(Math.random() * (max - min + 1)) + min\n\n    temp = temp.toString()\n\n    return temp\n}\n\ndata = {\n    'nutrientTemperature': randomInt(0, 100),\n    'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n    'tds': flow.get('dummyTDS'),\n    'ph': randomInt(1, 14),\n    'humidity': randomInt(0, 100),\n    'airTemperature': randomInt(10, 50),\n    'fertilizer': Math.round(randomInt(0, 1)),\n    'nutrient': Math.round(randomInt(0, 1)),\n    'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n    'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n}\n\nmsg.payload = data\n\nreturn msg",
+        "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.floor(Math.random() * (max - min + 1)) + min\n\n    temp = temp.toString()\n\n    return temp\n}\n\ndata = String(randomInt(0, 100)) + \"|\" + String(randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\"))) + \"|\" + String(randomInt(1, 14)) + \"|\" + String(randomInt(0, 100)) + \"|\" + String(randomInt(20, 40)) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1)))\n\n// data = {\n//     'nutrientTemperature': ,\n//     'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n//     'tds': flow.get('dummyTDS'),\n//     'ph': randomInt(1, 14),\n//     'humidity': randomInt(0, 100),\n//     'airTemperature': randomInt(10, 50),\n//     'fertilizer': Math.round(randomInt(0, 1)),\n//     'nutrient': Math.round(randomInt(0, 1)),\n//     'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n//     'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n// }\n\nmsg.payload = data\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 440,
+        "x": 310,
+        "y": 260,
         "wires": [
-            []
+            [
+                "3d976b5622e526c3"
+            ]
         ]
     },
     {
@@ -738,11 +771,11 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Set Data",
-        "func": "/* \n    Untuk memfilter data data yang tidak dapat digunakan dalam sister\n    Terdapat pesan yang masuk ke mqtt tanpa data\n */\n\n// Inisialisasi variabel\nlet data, arrData, dataSplit;\n// mengambil data dari topik AeroponicsSensor\"\nif (msg.topic == \"AeroponicsSensor\") {\n    data = msg.payload\n    msg.topic = 'data'\n}\n\n// Melakukan cek apakah datanya ada\nif (data != undefined) {\n    //Memisahkan data berdasarkan tanda |\n    dataSplit = data.split(\"|\")\n    // Cek apakah data yang diterima lengkap\n    if (dataSplit.length == 9) {\n        // Menyimpan data dalam array\n        arrData = {\n            'waterTemperature': dataSplit[0],\n            'tds': dataSplit[1],\n            'ph': dataSplit[2],\n            'humidity': dataSplit[3],\n            'airTemperature': dataSplit[4],\n            'fertilizer': dataSplit[5],\n            'nutrient': dataSplit[6],\n            'nutrientPumpStatus': dataSplit[7],\n            'fertilizerPumpStatus': dataSplit[8],\n            // 'systemControl': context.get('systemController'),\n        }\n        /* \n            Menyimpan array dalam penyimpanan sementara dengan tipe flow\n            Digunakan flow karena datanya akan digunakan pada node yang tidak terhubung dengan node ini namum masih dalam 1 flow\n         */\n        msg.payload = arrData;\n    }\n}\n\nreturn msg",
+        "func": "/* \n    Untuk memfilter data data yang tidak dapat digunakan dalam sister\n    Terdapat pesan yang masuk ke mqtt tanpa data\n */\n\n// Inisialisasi variabel\nlet data, arrData, dataSplit;\n// mengambil data dari topik AeroponicsSensor\"\nif (msg.topic == \"AeroponicsSensor\") {\n    data = msg.payload\n    msg.topic = 'data'\n}\n\n// Melakukan cek apakah datanya ada\nif (data != undefined) {\n    //Memisahkan data berdasarkan tanda |\n    dataSplit = data.split(\"|\")\n    // Cek apakah data yang diterima lengkap\n    if (dataSplit.length == 9) {\n        // Menyimpan data dalam array\n        arrData = {\n            'waterTemperature': Number(dataSplit[0]),\n            'tds': Number(dataSplit[1]),\n            'ph': Number(dataSplit[2]),\n            'humidity': Number(dataSplit[3]),\n            'airTemperature': Number(dataSplit[4]),\n            'fertilizer': Number(dataSplit[5]),\n            'nutrient': Number(dataSplit[6]),\n            'nutrientPumpStatus': Number(dataSplit[7]),\n            'fertilizerPumpStatus': Number(dataSplit[8]),\n            // 'systemControl': context.get('systemController'),\n        }\n        /* \n            Menyimpan array dalam penyimpanan sementara dengan tipe flow\n            Digunakan flow karena datanya akan digunakan pada node yang tidak terhubung dengan node ini namum masih dalam 1 flow\n         */\n        msg.payload = arrData;\n    }\n}\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set('dummyTDS', 1109)",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n// flow.set('dummyTDS', 1109)",
         "finalize": "",
         "libs": [],
         "x": 480,
@@ -761,7 +794,7 @@
         "topic": "AeroponicsSensor",
         "qos": "0",
         "datatype": "utf8",
-        "broker": "4fa1a46d10411e6a",
+        "broker": "95baad91265b5be6",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -778,7 +811,6 @@
         "id": "5306464457f18e6d",
         "type": "influxdb out",
         "z": "84358d592de45792",
-        "d": true,
         "influxdb": "a0c6bd21a651f905",
         "name": "Save to Database",
         "measurement": "pre",
@@ -1651,173 +1683,47 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "4fa1a46d10411e6a",
+        "broker": "95baad91265b5be6",
         "x": 960,
         "y": 840,
         "wires": []
     },
     {
-        "id": "4646e7f353cf1d09",
-        "type": "inject",
+        "id": "3d976b5622e526c3",
+        "type": "mqtt out",
         "z": "84358d592de45792",
-        "name": "Trigger Capture Morning",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 08 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "capture",
-        "payload": "iso",
-        "payloadType": "date",
-        "x": 1330,
-        "y": 280,
-        "wires": [
-            [
-                "2e3fb063f7b0a023"
-            ]
-        ]
-    },
-    {
-        "id": "1a5de5988d81b4d1",
-        "type": "debug",
-        "z": "84358d592de45792",
-        "name": "Print Success",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1960,
-        "y": 280,
+        "name": "Dummy Publish",
+        "topic": "AeroponicsSensor",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "95baad91265b5be6",
+        "x": 520,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "2d1309a068d390b6",
-        "type": "inject",
+        "id": "308d5e08709ba4c8",
+        "type": "mqtt out",
         "z": "84358d592de45792",
-        "name": "Trigger Capture Daytime",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 12 * * *",
-        "once": false,
-        "onceDelay": 0.1,
+        "d": true,
+        "g": "9f88271de0797f5b",
+        "name": "Temp",
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1330,
-        "y": 320,
-        "wires": [
-            [
-                "2e3fb063f7b0a023"
-            ]
-        ]
-    },
-    {
-        "id": "245a2a253090525a",
-        "type": "inject",
-        "z": "84358d592de45792",
-        "name": "Trigger Capture Afternoon",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "00 17 * * *",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1340,
-        "y": 360,
-        "wires": [
-            [
-                "2e3fb063f7b0a023"
-            ]
-        ]
-    },
-    {
-        "id": "2e3fb063f7b0a023",
-        "type": "exec",
-        "z": "84358d592de45792",
-        "command": "py",
-        "addpay": "",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Auto Capture",
-        "x": 1650,
-        "y": 320,
-        "wires": [
-            [
-                "1a5de5988d81b4d1"
-            ],
-            [
-                "951122a4f54f7e19"
-            ],
-            [
-                "cf95b82fc73670c1"
-            ]
-        ]
-    },
-    {
-        "id": "951122a4f54f7e19",
-        "type": "debug",
-        "z": "84358d592de45792",
-        "name": "Print Error",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1950,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "cf95b82fc73670c1",
-        "type": "debug",
-        "z": "84358d592de45792",
-        "name": "Print Exec Code",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1960,
-        "y": 360,
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4fa1a46d10411e6a",
+        "x": 250,
+        "y": 120,
         "wires": []
     }
 ]
