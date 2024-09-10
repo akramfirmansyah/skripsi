@@ -4,6 +4,8 @@ services:
     container_name: node-red
     ports:
       - "11880:1880"
+    environment:
+      - PYTHONUNBUFFERED=1
     volumes:
       - ./node-red:/data
     depends_on:

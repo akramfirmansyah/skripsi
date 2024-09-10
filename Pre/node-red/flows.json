@@ -554,7 +554,7 @@
         "g": "b7ed9a5a877c4fa0",
         "influxdb": "a0c6bd21a651f905",
         "name": "Read",
-        "query": "from(bucket: \"aeroponics\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"pre\")\n  |> aggregateWindow(every: 1s, fn: mean, createEmpty: false)\n  |> limit(n: 100)\n  |> sort(columns: [\"_time\"], desc: true)\n  |> yield(name: \"mean\")",
+        "query": "from(bucket: \"aeroponics\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"pre\")\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> limit(n: 100)\n  |> sort(columns: [\"_time\"], desc: true)\n  |> yield(name: \"mean\")",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
@@ -751,7 +751,7 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Dummy Data",
-        "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.floor(Math.random() * (max - min + 1)) + min\n\n    temp = temp.toString()\n\n    return temp\n}\n\ndata = String(randomInt(0, 100)) + \"|\" + String(randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\"))) + \"|\" + String(randomInt(1, 14)) + \"|\" + String(randomInt(0, 100)) + \"|\" + String(randomInt(20, 40)) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1)))\n\n// data = {\n//     'nutrientTemperature': ,\n//     'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n//     'tds': flow.get('dummyTDS'),\n//     'ph': randomInt(1, 14),\n//     'humidity': randomInt(0, 100),\n//     'airTemperature': randomInt(10, 50),\n//     'fertilizer': Math.round(randomInt(0, 1)),\n//     'nutrient': Math.round(randomInt(0, 1)),\n//     'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n//     'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n// }\n\nmsg.payload = data\n\nreturn msg",
+        "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.random() * (max - min) + min\n\n    temp = temp.toFixed(2)\n\n    return temp\n}\n\ndata = String(randomInt(0, 100.00)) + \"|\" + String(Math.round(randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")))) + \"|\" + String(randomInt(1, 14)) + \"|\" + String(randomInt(0, 100)) + \"|\" + String(randomInt(20, 40)) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1)))\n\n// data = {\n//     'nutrientTemperature': ,\n//     'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n//     'tds': flow.get('dummyTDS'),\n//     'ph': randomInt(1, 14),\n//     'humidity': randomInt(0, 100),\n//     'airTemperature': randomInt(10, 50),\n//     'fertilizer': Math.round(randomInt(0, 1)),\n//     'nutrient': Math.round(randomInt(0, 1)),\n//     'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n//     'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n// }\n\nmsg.payload = data\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -811,6 +811,7 @@
         "id": "5306464457f18e6d",
         "type": "influxdb out",
         "z": "84358d592de45792",
+        "d": true,
         "influxdb": "a0c6bd21a651f905",
         "name": "Save to Database",
         "measurement": "pre",
@@ -1725,5 +1726,98 @@
         "x": 250,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "980c7a8b6b9e3a33",
+        "type": "inject",
+        "z": "84358d592de45792",
+        "name": "Scheduler",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "datetime",
+                "v": "iso",
+                "vt": "date"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "capture image",
+        "payload": "",
+        "payloadType": "str",
+        "x": 1440,
+        "y": 320,
+        "wires": [
+            [
+                "17e9e26ac9bc9483"
+            ]
+        ]
+    },
+    {
+        "id": "17e9e26ac9bc9483",
+        "type": "exec",
+        "z": "84358d592de45792",
+        "command": "python3 /data/exec/autoCapture.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Capture Image",
+        "x": 1660,
+        "y": 320,
+        "wires": [
+            [
+                "92cd31be4f4ddb7a"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6015b912999c94d8",
+        "type": "debug",
+        "z": "84358d592de45792",
+        "name": "Exec Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2110,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "92cd31be4f4ddb7a",
+        "type": "function",
+        "z": "84358d592de45792",
+        "name": "Get Exec Output",
+        "func": "if (msg.payload.length <= 0) {\n    \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1890,
+        "y": 300,
+        "wires": [
+            [
+                "6015b912999c94d8"
+            ]
+        ]
     }
 ]
