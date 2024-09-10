@@ -28,13 +28,26 @@
       cd ..
    ```
 
-3. Create new InfluxDB API Token and copy it. **Make sure you copy new API Token. You won't be able to see it again!.** You can see the documentation [here](https://docs.influxdata.com/influxdb/v2/admin/tokens/).
+3. Install Python and pip in node-red container.
 
-4. Open node-red application in [localhost:11880](http://localhost:11880)
+   ```bash
+   docker compose exec node-red sh
+   ```
 
-5. Paste API token in node influxDB and update it. See image below.
+   In container shell
+
+   ```bash
+   apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+   apk add py3-pip
+   ```
+
+4. Create new InfluxDB API Token and copy it. **Make sure you copy new API Token. You won't be able to see it again!.** You can see the documentation [here](https://docs.influxdata.com/influxdb/v2/admin/tokens/).
+
+5. Open node-red application in [localhost:11880](http://localhost:11880)
+
+6. Paste API token in node influxDB and update it. See image below.
    ![Gambar 1. Group Test InfluxDB](./assets/influxdb-1.png)
    ![Gambar 2. influxdb in node](./assets/influxdb-2.png)
    ![Gambar 3. influxdb node](./assets/influxdb-3.png)
 
-6. Last, Setup MQTT Broker and deploy it.
+7. Last, Setup MQTT Broker and deploy it.
