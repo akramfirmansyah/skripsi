@@ -1805,7 +1805,7 @@
         "type": "function",
         "z": "84358d592de45792",
         "name": "Get Exec Output",
-        "func": "if (msg.payload.length <= 0) {\n    \n}\n\nreturn msg;",
+        "func": "if (msg.payload.length > 0) {\n    msg.payload = msg.payload\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
