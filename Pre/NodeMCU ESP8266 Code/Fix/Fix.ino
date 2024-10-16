@@ -84,7 +84,7 @@ void loop() {
   delay(100);
 
   inputMultiplexer(1);
-  pH = getpHValue(SIG);
+  pH = analogRead(SIG);
   delay(200);
 
   humidity = dht.readHumidity();
@@ -120,16 +120,6 @@ void inputMultiplexer(int channel){
   else{
     digitalWrite(S0,LOW); digitalWrite(S1,LOW); digitalWrite(S2,LOW); digitalWrite(S3,LOW);
   }
-}
-
-float getpHValue(int pin) {
-  float sensorValue = analogRead(pin);
-  float phValue = (-0.02642 * sensorValue) + 16.73;
-  if (phValue > 6){
-    phValue = phValue - 1;
-  }
-
-  return sensorValue;
 }
 
 int liquidDetection(int pin)
