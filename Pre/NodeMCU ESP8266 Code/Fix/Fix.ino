@@ -18,20 +18,11 @@
 #define FERTILIZER_DETECTOR_PIN 12
 #define RELAY_NUTRIENT_PIN 3
 #define RELAY_FERTILIZER_PIN 1
-// #define SSID "Kohaku"
-// #define PASSWORD "klmnbhj09"
-#define MQTTHOST "broker.hivemq.com"
-// #define MQTTHOST "18.139.208.170"
+#define SSID "skypianAcces"
+#define PASSWORD "Monitor123"
+// #define MQTTHOST "broker.hivemq.com"
+#define MQTTHOST "192.168.0.188"
 #define MQTTPORT  1883
-
-// Mendefinisikan SSID, password SSID, username dan password untuk login ke wifi kampus teknik gowa
-#define SSID "CLOUDIE_LAB"
-#define PASSWORD "hypervisor"
-#define username "D071181335"
-#define pwd "81335"
-
-// 
-String serverName = "http://teknik.hotspot.net/";
 
 // Inisialisasi variabel
 float waterTemperature;
@@ -186,32 +177,6 @@ void setupWifi(){
   Serial.println("WiFi Connected");
   Serial.println("IP Address : ");
   Serial.println(WiFi.localIP());
-
-  // Login ke teknik hotspot
-  if (WiFi.status() == WL_CONNECTED) {
-    WiFiClient client;
-    HTTPClient http;
-
-    String serverPath = serverName + "login";
-
-    http.begin(client, serverPath.c_str());
-
-    String formData = "username=" + String(username) + "&password=" + String(pwd);
-
-    int httpRespCode = http.POST(formData);
-
-    if (httpRespCode > 0) {
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpRespCode);
-    } else {
-      Serial.print("Error code: ");
-      Serial.println(httpRespCode);
-    }
-
-    http.end();
-  } else {
-    Serial.println("Wifi disconnected");
-  }
 }
 
 
