@@ -382,21 +382,47 @@ class AdaptiveControll:
 
         return df
 
-    def compute(self) -> pd.DataFrame:
+    def compute(self):
         df = self.predict()
 
-        # Need help
+        index = 0
+        num_active = 0
+        result = []
+        for iter in range(len(df)):
+            if iter == index and num_active < 5:
+                value = 0
 
-        return self
+                index += 1
+                num_active += 1
+            elif num_active == 5:
+                value = 1
+
+                delay = self.FuzzyLogicNutrientPump(
+                    df.iloc[index]["airTemperature"], df.iloc[index]["humidity"]
+                )
+
+                index += delay
+                num_active = 0
+
+            result.append(value)
+
+        result = np.array(result)
+
+        df["is_pump_not_active"] = result
+
+        filepath = Path("data/Prediction.csv")
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        df.to_csv(filepath)
 
 
 airTemperature = np.random.randint(0, 45)
 humidity = np.random.randint(0, 100)
 adaptiveControl = AdaptiveControll()
 
-print(adaptiveControl.FuzzyLogicNutrientPump(airTemperature, humidity))
+print(adaptiveControl.compute())
 
 # Main fuction in Class Adaptive Controll
 # 1. function FuzzyLogicNutrientPump for get value interval spraying delay of Nutrient Pump
 # 2. function training_model, for training XGBoost model with new data
 # 3. function predict, for predict future
+# 4. function compute, for label pump is active or not
