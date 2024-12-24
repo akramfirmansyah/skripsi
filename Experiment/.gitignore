@@ -1,4 +1,11 @@
 # Directory
 venv*/
+__pycache__/
+Fuzzy/
+LSTM/
+SARIMA/
+XGBoost/
 
+# File
+*.ipynb
 .env

@@ -1,44 +1,118 @@
-import numpy as np
-import skfuzzy as fuzz
-from skfuzzy import control as ctrl
-import influxdb_client
+from datetime import datetime
 from dotenv import load_dotenv
+from pathlib import Path
+from skfuzzy import control as ctrl
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_absolute_percentage_error,
+    root_mean_squared_error,
+)
+from sklearn.model_selection import train_test_split
+
+import csv
+import glob
+import influxdb_client
+import matplotlib.pyplot as plt
+import numpy as np
 import os
 import pandas as pd
+import pickle
+import skfuzzy as fuzz
+import warnings
+import xgboost as xgb
+
+warnings.filterwarnings("ignore")
 
 
 class AdaptiveControll:
-    def __init__(self, airTemperature: int | float, humidity: int | float) -> None:
-        self.airTemperature = airTemperature
-        self.humidity = humidity
+    def __init__(self) -> None:
+        self.logs_dir = "logs/"
+        self.model_dir = "model/"
+        self.plot_dir = "plots/"
 
-    def FuzzyLogicNutrientPump(self):
+    def FuzzyLogicNutrientPump(
+        self, airTemperature: int | float, humidity: int | float
+    ) -> int:
+        """
+        Implements a fuzzy logic-based control system to calculate the spraying delay
+        of a nutrient pump based on air temperature and humidity.
+
+        **Input**:
+        - `airTemperature` : The current air temperature (in °C) used as input for the fuzzy system.
+        - `humidity` : The current humidity (in %) used as input for the fuzzy system.
+
+        **Output**:
+        - Returns an integer representing the spraying delay (in minutes), calculated based on the fuzzy logic system.
+
+        **Fuzzy Logic Rules Table**:
+
+        | Air Temperature | Humidity   | Spraying Delay |
+        |------------------|------------|----------------|
+        | Hot             | Dry        | Short          |
+        | Hot             | Optimal    | Short          |
+        | Hot             | Moist      | Normal         |
+        | Optimal         | Dry        | Short          |
+        | Optimal         | Optimal    | Normal         |
+        | Optimal         | Moist      | Normal         |
+        | Cool            | Dry        | Normal         |
+        | Cool            | Optimal    | Normal         |
+        | Cool            | Moist      | Long           |
+
+        Example Usage:
+            # Example inputs
+            adactiveControll = AdaptiveControll(25, 80)
+
+            # Calculate spraying delay
+            spraying_delay = self.FuzzyLogicNutrientPump()
+            print(f"Recommended Spraying Delay: {spraying_delay} seconds")
+        """
+
         memberAirTemperature = ctrl.Antecedent(np.arange(0, 45 + 1), "Air Temperature")
         memberHumidity = ctrl.Antecedent(np.arange(0, 100 + 1), "Humidity")
-        memberDelay = ctrl.Consequent(np.arange(10, 45 + 1), "Spraying Delay")
+        memberDelay = ctrl.Consequent(np.arange(0, 45 + 1), "Spraying Delay")
 
+        # Create Membership
         memberAirTemperature["cool"] = fuzz.trapmf(
-            memberAirTemperature.universe, [0, 0, 10, 15]
+            memberAirTemperature.universe, [0, 0, 13, 18]
         )
-        memberAirTemperature["optimal"] = fuzz.trimf(
-            memberAirTemperature.universe, [11, 18, 26]
+        memberAirTemperature["optimal"] = fuzz.trapmf(
+            memberAirTemperature.universe, [13, 18, 25, 30]
         )
         memberAirTemperature["hot"] = fuzz.trapmf(
-            memberAirTemperature.universe, [22, 30, 45, 45]
+            memberAirTemperature.universe, [25, 30, 45, 45]
         )
 
-        memberHumidity["dry"] = fuzz.trapmf(memberHumidity.universe, [0, 0, 70, 80])
-        memberHumidity["optimal"] = fuzz.trimf(
-            memberHumidity.universe, [70, (90 + 70) / 2, 90]
+        memberHumidity["dry"] = fuzz.trapmf(memberHumidity.universe, [0, 0, 65, 70])
+        memberHumidity["optimal"] = fuzz.trapmf(
+            memberHumidity.universe, [65, 70, 80, 85]
         )
         memberHumidity["moist"] = fuzz.trapmf(
-            memberHumidity.universe, [80, 90, 100, 100]
+            memberHumidity.universe, [80, 85, 100, 100]
         )
 
-        memberDelay["short"] = fuzz.trapmf(memberDelay.universe, [0, 0, 20, 25])
-        memberDelay["normal"] = fuzz.trapmf(memberDelay.universe, [20, 25, 35, 40])
-        memberDelay["long"] = fuzz.trapmf(memberDelay.universe, [35, 40, 45, 45])
+        memberDelay["short"] = fuzz.trapmf(memberDelay.universe, [0, 0, 10, 15])
+        memberDelay["normal"] = fuzz.trapmf(memberDelay.universe, [10, 15, 30, 35])
+        memberDelay["long"] = fuzz.trapmf(memberDelay.universe, [30, 35, 45, 45])
 
+        # Save membership as png
+        if not os.path.isdir(self.plot_dir):
+            os.makedirs(self.plot_dir)
+        pngs = glob.glob(self.plot_dir + "*.png")
+
+        if len(pngs) == 0:
+            memberAirTemperature.view()
+            plt.title("Air Temperature Membership")
+            plt.savefig(f"{self.plot_dir}Air Temperature Membership.png")
+
+            memberHumidity.view()
+            plt.title("Humidity Membership")
+            plt.savefig(f"{self.plot_dir}Humidity Membership.png")
+
+            memberDelay.view()
+            plt.title("Spraying Delay Membership")
+            plt.savefig(f"{self.plot_dir}Spraying Delay Membership.png")
+
+        # Define rules
         rule1 = ctrl.Rule(
             memberAirTemperature["hot"] & memberHumidity["dry"], memberDelay["short"]
         )
@@ -78,8 +152,8 @@ class AdaptiveControll:
 
         spraying_delay = ctrl.ControlSystemSimulation(spraying_ctrl)
 
-        spraying_delay.input["Air Temperature"] = self.airTemperature
-        spraying_delay.input["Humidity"] = self.humidity
+        spraying_delay.input["Air Temperature"] = airTemperature
+        spraying_delay.input["Humidity"] = humidity
 
         spraying_delay.compute()
 
@@ -134,6 +208,10 @@ class AdaptiveControll:
         df_airTemp = self.fill_na(df_airTemp, "airTemperature")
         df_humidity = self.fill_na(df_humidity, "humidity")
 
+        # Create features
+        df_airTemp = self.create_features(df_airTemp)
+        df_humidity = self.create_features(df_humidity)
+
         return df_airTemp, df_humidity
 
     def replace_outlier(self, data, column):
@@ -142,8 +220,8 @@ class AdaptiveControll:
         lower_limit = q1 - 1.5 * iqr
         upper_limit = q3 + 1.5 * iqr
 
-        data[f"{column}"].loc[data[f"{column}"] > upper_limit] = upper_limit
-        data[f"{column}"].loc[data[f"{column}"] < lower_limit] = lower_limit
+        data.loc[data[f"{column}"] > upper_limit, f"{column}"] = upper_limit
+        data.loc[data[f"{column}"] < lower_limit, f"{column}"] = lower_limit
 
         return data
 
@@ -172,10 +250,153 @@ class AdaptiveControll:
 
         return df_fillna
 
+    def create_features(self, dataframe):
+        data = dataframe.copy()
+        data["year"] = data.index.year
+        data["month"] = data.index.month
+        data["day"] = data.index.day
+        data["hour"] = data.index.hour
+        data["minute"] = data.index.minute
+        data["dayofyear"] = data.index.dayofyear
+        data["dayofweek"] = data.index.dayofweek
+
+        return data
+
+    def create_model(self, X_train, y_train):
+        model = xgb.XGBRegressor(
+            n_estimators=2500,
+            learning_rate=0.01,
+            max_depth=3,
+            subsample=1.0,
+            colsample_bytree=1.0,
+            gamma=0,
+            reg_alpha=1,
+            reg_lambda=2,
+        )
+
+        model.fit(X_train, y_train)
+
+        return model
+
+    def save_model(self, model: xgb.XGBRegressor, model_name: str):
+        filepath = Path(f"{self.model_dir}XGBoost_{model_name}.pkl")
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        pickle.dump(model, open(filepath, "wb"))
+
+    def save_matrix(self, model, X_test, y_test, column_name: str):
+        test_time = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
+        model = model
+
+        y_test["prediction"] = model.predict(X_test)
+
+        mae = mean_absolute_error(y_test[f"{column_name}"], y_test["prediction"])
+        mape = mean_absolute_percentage_error(
+            y_test[f"{column_name}"], y_test["prediction"]
+        )
+        rmse = root_mean_squared_error(y_test[f"{column_name}"], y_test["prediction"])
+
+        # Define the header and data
+        header = ["datetime", "mae", "mape", "rmse"]
+        data = [test_time, mae, mape, rmse]
+
+        # Check if the file exists and has a header
+        file_exists = os.path.isfile(f"{self.logs_dir}metrix_{column_name}.csv")
+        header_exists = False
+
+        if file_exists:
+            with open(f"{self.logs_dir}metrix_{column_name}.csv", "r") as file:
+                reader = csv.reader(file)
+                # Check the first row to see if it's the header
+                header_exists = any(row == header for row in reader)
+
+        # Open the file in append mode
+        with open(f"{self.logs_dir}metrix_{column_name}.csv", "a", newline="") as file:
+            writer = csv.writer(file)
+            # Write the header if it doesn't exist
+            if not header_exists:
+                writer.writerow(header)
+            # Write the data
+            writer.writerow(data)
+
     def training_model(self):
+        # Retrieving preprocessed data
+        df_temp, df_hum = self.preprocessing()
+
+        # Split data to X and y
+        X_temp, y_temp = (
+            df_temp.drop(columns=["airTemperature"]),
+            df_temp[["airTemperature"]],
+        )
+        X_hum, y_hum = (
+            df_hum.drop(columns=["humidity"]),
+            df_hum[["humidity"]],
+        )
+
+        # Split data to train and test
+        X_train_temp, X_test_temp, y_train_temp, y_test_temp = train_test_split(
+            X_temp, y_temp, test_size=0.3, shuffle=False
+        )
+        X_train_hum, X_test_hum, y_train_hum, y_test_hum = train_test_split(
+            X_hum, y_hum, test_size=0.3, shuffle=False
+        )
+
+        model_temp = self.create_model(X_train_temp, y_train_temp)
+        model_hum = self.create_model(X_train_hum, y_train_hum)
+
+        self.save_model(model_temp, "airTemperature")
+        self.save_model(model_hum, "humidity")
+
+        self.save_matrix(model_temp, X_test_temp, y_test_temp, "airTemperature")
+        self.save_matrix(model_hum, X_test_hum, y_test_hum, "humidity")
+
+    def load_model(self, filepath: str):
+        """
+        Function for load model
+        """
+        model = pickle.load(open(filepath, "rb"))
+
+        return model
+
+    def single_predict(self, model, column_name):
+        startdate = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
+        date_range = pd.date_range(start=startdate, periods=(60 * 24), freq="min")
+
+        df_future = pd.DataFrame({"datetime": date_range})
+        df_future = df_future.set_index("datetime")
+        df_future = self.create_features(df_future)
+
+        df_future[f"{column_name}"] = model.predict(df_future)
+
+        return df_future[[f"{column_name}"]]
+
+    def predict(self) -> pd.DataFrame:
+        model_temperature = self.load_model(
+            f"{self.model_dir}XGBoost_airTemperature.pkl"
+        )
+        model_humidity = self.load_model(f"{self.model_dir}XGBoost_humidity.pkl")
+
+        df_temperature = self.single_predict(model_temperature, "airTemperature")
+        df_humidity = self.single_predict(model_humidity, "humidity")
+
+        df = pd.concat([df_temperature, df_humidity], axis=1)
+
+        return df
+
+    def compute(self) -> pd.DataFrame:
+        df = self.predict()
+
+        # Need help
+
         return self
 
 
 airTemperature = np.random.randint(0, 45)
 humidity = np.random.randint(0, 100)
-adaptiveControl = AdaptiveControll(airTemperature, humidity)
+adaptiveControl = AdaptiveControll()
+
+print(adaptiveControl.FuzzyLogicNutrientPump(airTemperature, humidity))
+
+# Main fuction in Class Adaptive Controll
+# 1. function FuzzyLogicNutrientPump for get value interval spraying delay of Nutrient Pump
+# 2. function training_model, for training XGBoost model with new data
+# 3. function predict, for predict future
