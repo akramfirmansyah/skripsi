@@ -1,5 +1,5 @@
 from datetime import datetime
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key
 from pathlib import Path
 from skfuzzy import control as ctrl
 from sklearn.metrics import (
@@ -37,15 +37,17 @@ class AdaptiveControll:
         Implements a fuzzy logic-based control system to calculate the spraying delay
         of a nutrient pump based on air temperature and humidity.
 
-        **Input**:
+        Input:
+        ----------
         - `airTemperature` : The current air temperature (in °C) used as input for the fuzzy system.
         - `humidity` : The current humidity (in %) used as input for the fuzzy system.
 
-        **Output**:
-        - Returns an integer representing the spraying delay (in minutes), calculated based on the fuzzy logic system.
+        Output:
+        ----------
+        Returns an integer representing the spraying delay (in minutes), calculated based on the fuzzy logic system.
 
-        **Fuzzy Logic Rules Table**:
-
+        Fuzzy Logic Rules Table:
+        ----------
         | Air Temperature | Humidity   | Spraying Delay |
         |------------------|------------|----------------|
         | Hot             | Dry        | Short          |
@@ -58,13 +60,12 @@ class AdaptiveControll:
         | Cool            | Optimal    | Normal         |
         | Cool            | Moist      | Long           |
 
-        Example Usage:
-            # Example inputs
-            adactiveControll = AdaptiveControll(25, 80)
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
 
-            # Calculate spraying delay
-            spraying_delay = self.FuzzyLogicNutrientPump()
-            print(f"Recommended Spraying Delay: {spraying_delay} seconds")
+        >>> spraying_delay = self.FuzzyLogicNutrientPump(25, 78)
+        >>> print(f"Recommended Spraying Delay: {spraying_delay} seconds")
         """
 
         memberAirTemperature = ctrl.Antecedent(np.arange(0, 45 + 1), "Air Temperature")
@@ -112,7 +113,7 @@ class AdaptiveControll:
             plt.title("Spraying Delay Membership")
             plt.savefig(f"{self.plot_dir}Spraying Delay Membership.png")
 
-        # Define rules
+        # Create rules
         rule1 = ctrl.Rule(
             memberAirTemperature["hot"] & memberHumidity["dry"], memberDelay["short"]
         )
@@ -146,22 +147,50 @@ class AdaptiveControll:
             memberAirTemperature["cool"] & memberHumidity["moist"], memberDelay["long"]
         )
 
+        # Regsiter rules
         spraying_ctrl = ctrl.ControlSystem(
             [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9]
         )
 
+        # Register Control System
         spraying_delay = ctrl.ControlSystemSimulation(spraying_ctrl)
 
+        # Get input Air Temperature & Humidity
         spraying_delay.input["Air Temperature"] = airTemperature
         spraying_delay.input["Humidity"] = humidity
 
+        # Calculate
         spraying_delay.compute()
 
+        # Return result as Decimal
         return int(spraying_delay.output["Spraying Delay"])
 
-    def get_data(self, measurement="first", field="airTemperature"):
-        print(f"Get data {field} from database...")
+    def get_data(
+        self, measurement: str = "first", field: str = "airTemperature"
+    ) -> pd.DataFrame:
+        """
+        This function connects to an InfluxDB instance using credentials and configurations from environment variables,
+        executes a Flux query to fetch data based on the specified measurement and field, and processes the result
+        into a pandas DataFrame with a 1-minute frequency.
 
+        Inputs:
+        ----------
+        - `measurement` : The measurement name to query from the database. Default is `"first"`.
+        - `field` : The specific field within the measurement to query. Default is `"airTemperature"`.
+
+        Outputs:
+        ----------
+        Returns a pandas DataFrame containing the queried data with the following characteristics:
+        - Index : `datetime` column converted to a pandas DateTimeIndex with a 1-minute frequency.
+        - Columns : Contains one column with the queried `field` values.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.get_data(measurement="main", field="temperature")
+        >>> df.head()
+        """
         load_dotenv()
 
         token = os.getenv("TOKEN")
@@ -194,13 +223,35 @@ class AdaptiveControll:
                 )
 
         df = pd.DataFrame(data)
-        df["datetime"] = pd.to_datetime(df["datetime"])
+        df["datetime"] = pd.to_datetime(df["datetime"]).dt.tz_localize(None)
         df = df.set_index("datetime").asfreq("1min")
 
         return df
 
-    def preprocessing(self):
-        print("Preprocessing...")
+    def preprocessing(self) -> tuple:
+        """
+        Function retrieves air temperature and humidity data from InfluxDB, cleanses the data by
+        replacing outliers and filling missing values, and then creates additional features for both datasets.
+
+        Steps:
+        ----------
+        1. Fetches data for air temperature and humidity.
+        2. Cleanses the data (handle outlier & fill missing values)
+        3. Creates additional features for both datasets.
+
+        Output:
+        ----------
+        Returns a tuple of two pandas DataFrames:
+        - `df_airTemp` : Preprocessed air temperature data.
+        - `df_humidity` : Preprocessed humidity data.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df_temp, df_hum = adap.preprocessing()
+        >>> df_temp.head()
+        """
 
         # Get data from InfluxDB
         df_airTemp = self.get_data(measurement="first", field="airTemperature")
@@ -215,16 +266,32 @@ class AdaptiveControll:
         df_humidity = self.fill_na(df_humidity, "humidity")
 
         # Create features
-        print("Create features data airTemperature and humidity...")
-
         df_airTemp = self.create_features(df_airTemp)
         df_humidity = self.create_features(df_humidity)
 
         return df_airTemp, df_humidity
 
-    def replace_outlier(self, data, column):
-        print(f"Replace outlier data {column}...")
+    def replace_outlier(self, data: pd.DataFrame, column: str) -> pd.DataFrame:
+        """
+        Function identifies outliers in the specified column based on the Interquartile Range (IQR) method
+        and replaces them with the nearest limit (either lower or upper).
 
+        Inputs:
+        ----------
+        - `data` : The pandas DataFrame containing the data.
+        - `column` : The name of the column in the DataFrame to process for outliers.
+
+        Output:
+        ----------
+        Returns a pandas DataFrame.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.replace_outlier(data, "temperature")
+        >>> df.head()
+        """
         q1, q3 = data[f"{column}"].quantile(0.25), data[f"{column}"].quantile(0.75)
         iqr = q3 - q1
         lower_limit = q1 - 1.5 * iqr
@@ -235,9 +302,27 @@ class AdaptiveControll:
 
         return data
 
-    def fill_na(self, data, column):
-        print(f"Fill NaN data {column}")
+    def fill_na(self, data: pd.DataFrame, column: str) -> pd.DataFrame:
+        """
+        Function calculates the mean value for each unique time (hour and minute) across all data points
+        and uses these values to fill in the missing values (`NaN`) in the specified column of the DataFrame.
 
+        Inputs:
+        ----------
+        - `data` : The pandas DataFrame containing the data.
+        - `column` : The name of the column in the DataFrame to fill missing values (`NaN`).
+
+        Output:
+        ----------
+        Returns a pandas DataFrame.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.fill_na(data, "temperature")
+        >>> df.head()
+        """
         # Get mean HH:MM
         resampled_df = data.copy()
         resampled_df = resampled_df.resample("min").mean()
@@ -262,7 +347,27 @@ class AdaptiveControll:
 
         return df_fillna
 
-    def create_features(self, dataframe):
+    def create_features(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """
+        Function extracts index `DatetimeIndex` of the input DataFrame
+        and appends them as new columns. The new columns include year, month, day, hour, minute,
+        day of the year, and day of the week.
+
+        Inputs:
+        ----------
+        - `data` : The pandas DataFrame with index type `pandas.DatetimeIndex`.
+
+        Output:
+        ----------
+        Returns a pandas DataFrame.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.create_features(data)
+        >>> df.head()
+        """
         data = dataframe.copy()
         data["year"] = data.index.year
         data["month"] = data.index.month
@@ -274,9 +379,28 @@ class AdaptiveControll:
 
         return data
 
-    def create_model(self, X_train, y_train):
-        print("Create XGBoost Model...")
+    def create_model(
+        self, X_train: pd.DataFrame, y_train: pd.DataFrame
+    ) -> xgb.XGBRegressor:
+        """
+        Function create XGBoost model and training it.
 
+        Inputs:
+        ----------
+        - `x_train` : The pandas DataFrame for training.
+        - `y_train` : The pandas DataFrame for training target.
+
+        Output:
+        ----------
+        Returns a XGBoost model.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> model = adap.create_model(x_train, y_train)
+        >>> model.predict(x_test)
+        """
         model = xgb.XGBRegressor(
             n_estimators=2500,
             learning_rate=0.01,
@@ -292,16 +416,51 @@ class AdaptiveControll:
 
         return model
 
-    def save_model(self, model: xgb.XGBRegressor, model_name: str):
-        print("Save model...")
+    def save_model(self, model: xgb.XGBRegressor, model_name: str) -> None:
+        """
+        Function save XGBoost model. Model will be save as `XGBoost_{model_name}.pkl` in folder `model`.
 
+        Inputs:
+        ----------
+        - `x_train` : The pandas DataFrame for training.
+        - `y_train` : The pandas DataFrame for training target.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> model = adap.create_model(x_train, y_train)
+        >>> adap.save_model(model, 'airTemperature')
+        """
         filepath = Path(f"{self.model_dir}XGBoost_{model_name}.pkl")
         filepath.parent.mkdir(parents=True, exist_ok=True)
         pickle.dump(model, open(filepath, "wb"))
 
-    def save_matrix(self, model, X_test, y_test, column_name: str):
-        print("Save training matrix as csv...")
+    def save_matrix(
+        self, model, X_test: pd.DataFrame, y_test: pd.DataFrame, column_name: str
+    ) -> None:
+        """
+        Function save matrix XGBoost model to csv file in folder `logs`.
+        `file CSV` include
+        - `datetime` : The timestamp metrix run.
+        - `mae` : `Mean Absolute Error Metrix`
+        - `mape` : `Mean Absolute Percentage Error Metrix`
+        - `rmse` : `Root Mean Square Error Metrix`
 
+        Inputs:
+        ----------
+        - `model` : The model want to test.
+        - `x_test` : The pandas DataFrame for testing.
+        - `y_test` : The pandas DataFrame for target testing (true value).
+        - `column_name` : The column name of pandas Dataframe testing.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> model = adap.create_model(x_train, y_train)
+        >>> adap.save_matrix(model, x_test, y_test, 'airtemperature')
+        """
         test_time = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
         model = model
 
@@ -336,9 +495,17 @@ class AdaptiveControll:
             # Write the data
             writer.writerow(data)
 
-    def training_model(self):
-        print("Training Model")
+    def training_model(self) -> None:
+        """
+        Function training XGBoost model (`airTemperature` & `humidity`).
+        Function include get data from database, preprocessing, split data, create model, and save model.
 
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> adap.training_model()
+        """
         # Retrieving preprocessed data
         df_temp, df_hum = self.preprocessing()
 
@@ -369,15 +536,47 @@ class AdaptiveControll:
         self.save_matrix(model_temp, X_test_temp, y_test_temp, "airTemperature")
         self.save_matrix(model_hum, X_test_hum, y_test_hum, "humidity")
 
-    def load_model(self, filepath: str):
+    def load_model(self, filepath: str) -> xgb.XGBRegressor:
         """
-        Function for load model
+        Function load model.
+
+        Inputs:
+        ----------
+        - `filepath` : The filepath model stored.
+
+        Output:
+        ----------
+        Returns a XGBoost model.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> model = adap.load_model('model/XGBoost_airTemperature.pkl')
         """
         model = pickle.load(open(filepath, "rb"))
 
         return model
 
-    def single_predict(self, model, column_name):
+    def single_predict(self, model: xgb.XGBRegressor, column_name: str) -> pd.DataFrame:
+        """
+        Function predict future.
+
+        Inputs:
+        ----------
+        - `model` : The XGBoost model.
+        - `column_name` : The column name for prediction value.
+
+        Output:
+        ----------
+        Returns a pandas DataFrame.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.single_predict(model, "airTemperaturePrediction")
+        """
         startdate = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
         date_range = pd.date_range(start=startdate, periods=(60 * 24), freq="min")
 
@@ -390,6 +589,19 @@ class AdaptiveControll:
         return df_future[[f"{column_name}"]]
 
     def predict(self) -> pd.DataFrame:
+        """
+        Function multiple (airTemperature & humidity) predict future.
+
+        Output:
+        ----------
+        Returns a pandas DataFrame.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> df = adap.predict()
+        """
         model_temperature = self.load_model(
             f"{self.model_dir}XGBoost_airTemperature.pkl"
         )
@@ -402,12 +614,50 @@ class AdaptiveControll:
 
         return df
 
-    def compute(self):
-        df = self.predict()
+    def get_last_active(self) -> int:
+        """
+        Function get last iteration
 
-        index = 0
+        Output:
+        ----------
+        Returns last last iteration.
+        """
+        load_dotenv(".env")
+        predict_path = Path("./data/Prediction.csv")
+
+        last_iter = 0
+
+        if predict_path.exists():
+            df_old = pd.read_csv("./data/Prediction.csv")
+            last_index = df_old[df_old == 0].last_valid_index()
+            last_index = len(df_old) - last_index
+
+            last_iter = int(os.getenv("LAST_ITER"))
+
+            last_iter -= last_index
+
+        return last_iter
+
+    def compute(self):
+        """
+        Function create new pandas DataFrame with new label `pump_is_not_active` using Fuzzy Logic method
+        base prediction of `airTemperature` and `humidity` then save it as csv file in `data` folder.
+
+        Example:
+        ----------
+        >>> adap = AdaptiveControll()
+
+        >>> adap.compute()
+        """
+        df = self.predict()
+        index = self.get_last_active()
         num_active = 0
         result = []
+
+        env_iter = Path(".env")
+
+        value = 1
+
         for iter in range(len(df)):
             if iter == index and num_active < 5:
                 value = 0
@@ -421,6 +671,14 @@ class AdaptiveControll:
                     df.iloc[index]["airTemperature"], df.iloc[index]["humidity"]
                 )
 
+                os.environ["DELAY"] = str(delay)
+
+                set_key(
+                    dotenv_path=env_iter,
+                    key_to_set="LAST_ITER",
+                    value_to_set=os.environ["DELAY"],
+                )
+
                 index += delay
                 num_active = 0
 
@@ -432,7 +690,10 @@ class AdaptiveControll:
 
         filepath = Path("data/Prediction.csv")
         filepath.parent.mkdir(parents=True, exist_ok=True)
-        df.to_csv(filepath)
+        if filepath.exists():
+            df.to_csv(filepath, mode="a", header=False)
+        else:
+            df.to_csv(filepath, mode="w")
 
 
 # Main fuction in Class Adaptive Controll
