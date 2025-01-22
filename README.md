@@ -1,3 +1,3 @@
 ## Judul
 
-Analisis dan Implementasi kontrol adaptif pada Sistem kontrol dan monitoring tanaman aeroponik berbasis IoT
+Analisis dan Implementasi kontrol adaptif pada Sistem kontrol dan monitoring tanaman aeroponik
