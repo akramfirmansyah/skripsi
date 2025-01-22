@@ -67,103 +67,86 @@ class AdaptiveControll:
         >>> spraying_delay = self.FuzzyLogicNutrientPump(25, 78)
         >>> print(f"Recommended Spraying Delay: {spraying_delay} seconds")
         """
+        # Defining membership scope
+        memberAirTemperature = np.arange(0, 45 + 1)
+        memberHumidity = np.arange(0, 100 + 1)
+        memberDelay = np.arange(0, 45 + 1)
 
-        memberAirTemperature = ctrl.Antecedent(np.arange(0, 45 + 1), "Air Temperature")
-        memberHumidity = ctrl.Antecedent(np.arange(0, 100 + 1), "Humidity")
-        memberDelay = ctrl.Consequent(np.arange(0, 45 + 1), "Spraying Delay")
-
-        # Create Membership
-        memberAirTemperature["cool"] = fuzz.trapmf(
-            memberAirTemperature.universe, [0, 0, 13, 18]
+        # Create Membership Air Temperature
+        memberAirTemperature_cool = fuzz.trapmf(memberAirTemperature, [0, 0, 13, 18])
+        memberAirTemperature_optimal = fuzz.trapmf(
+            memberAirTemperature, [13, 18, 25, 30]
         )
-        memberAirTemperature["optimal"] = fuzz.trapmf(
-            memberAirTemperature.universe, [13, 18, 25, 30]
+        memberAirTemperature_hot = fuzz.trapmf(memberAirTemperature, [25, 30, 45, 45])
+
+        # Create Membership Humidity
+        memberHumidity_dry = fuzz.trapmf(memberHumidity, [0, 0, 65, 70])
+        memberHumidity_optimal = fuzz.trapmf(memberHumidity, [65, 70, 80, 85])
+        memberHumidity_moist = fuzz.trapmf(memberHumidity, [80, 85, 100, 100])
+
+        # Create Membership Spraying Delay
+        memberDelay_short = fuzz.trapmf(memberDelay, [0, 0, 10, 15])
+        memberDelay_normal = fuzz.trapmf(memberDelay, [10, 15, 30, 35])
+        memberDelay_long = fuzz.trapmf(memberDelay, [30, 35, 45, 45])
+
+        # Calculating the degree of membership Air Temperature
+        memberAirTemperature_cool_degree = fuzz.interp_membership(
+            memberAirTemperature, memberAirTemperature_cool, airTemperature
         )
-        memberAirTemperature["hot"] = fuzz.trapmf(
-            memberAirTemperature.universe, [25, 30, 45, 45]
+        memberAirTemperature_optimal_degree = fuzz.interp_membership(
+            memberAirTemperature, memberAirTemperature_optimal, airTemperature
+        )
+        memberAirTemperature_hot_degree = fuzz.interp_membership(
+            memberAirTemperature, memberAirTemperature_hot, airTemperature
         )
 
-        memberHumidity["dry"] = fuzz.trapmf(memberHumidity.universe, [0, 0, 65, 70])
-        memberHumidity["optimal"] = fuzz.trapmf(
-            memberHumidity.universe, [65, 70, 80, 85]
+        # Calculating the degree of membership Humidity
+        memberHumidity_dry_degree = fuzz.interp_membership(
+            memberHumidity, memberHumidity_dry, humidity
         )
-        memberHumidity["moist"] = fuzz.trapmf(
-            memberHumidity.universe, [80, 85, 100, 100]
+        memberHumidity_optimal_degree = fuzz.interp_membership(
+            memberHumidity, memberHumidity_optimal, humidity
         )
-
-        memberDelay["short"] = fuzz.trapmf(memberDelay.universe, [0, 0, 10, 15])
-        memberDelay["normal"] = fuzz.trapmf(memberDelay.universe, [10, 15, 30, 35])
-        memberDelay["long"] = fuzz.trapmf(memberDelay.universe, [30, 35, 45, 45])
-
-        # Save membership as png
-        if not os.path.isdir(self.plot_dir):
-            os.makedirs(self.plot_dir)
-        pngs = glob.glob(self.plot_dir + "*.png")
-
-        if len(pngs) == 0:
-            memberAirTemperature.view()
-            plt.title("Air Temperature Membership")
-            plt.savefig(f"{self.plot_dir}Air Temperature Membership.png")
-
-            memberHumidity.view()
-            plt.title("Humidity Membership")
-            plt.savefig(f"{self.plot_dir}Humidity Membership.png")
-
-            memberDelay.view()
-            plt.title("Spraying Delay Membership")
-            plt.savefig(f"{self.plot_dir}Spraying Delay Membership.png")
+        memberHumidity_moist_degree = fuzz.interp_membership(
+            memberHumidity, memberHumidity_moist, humidity
+        )
 
         # Create rules
-        rule1 = ctrl.Rule(
-            memberAirTemperature["hot"] & memberHumidity["dry"], memberDelay["short"]
+        rule1 = np.fmin(memberAirTemperature_hot_degree, memberHumidity_dry_degree)
+        rule2 = np.fmin(memberAirTemperature_hot_degree, memberHumidity_optimal_degree)
+        rule3 = np.fmin(memberAirTemperature_hot_degree, memberHumidity_moist_degree)
+        rule4 = np.fmin(memberAirTemperature_optimal_degree, memberHumidity_dry_degree)
+        rule5 = np.fmin(
+            memberAirTemperature_optimal_degree, memberHumidity_optimal_degree
         )
-        rule2 = ctrl.Rule(
-            memberAirTemperature["hot"] & memberHumidity["optimal"],
-            memberDelay["short"],
+        rule6 = np.fmin(
+            memberAirTemperature_optimal_degree, memberHumidity_moist_degree
         )
-        rule3 = ctrl.Rule(
-            memberAirTemperature["hot"] & memberHumidity["moist"], memberDelay["normal"]
+        rule7 = np.fmin(memberAirTemperature_cool_degree, memberHumidity_dry_degree)
+        rule8 = np.fmin(memberAirTemperature_cool_degree, memberHumidity_optimal_degree)
+        rule9 = np.fmin(memberAirTemperature_cool_degree, memberHumidity_moist_degree)
+
+        # Mamdani Inference System
+        delay_short = np.fmax(rule1, np.fmax(rule2, rule4))
+        delay_normal = np.fmax(
+            rule3, np.fmax(rule5, np.fmax(rule6, np.fmax(rule7, rule8)))
         )
-        rule4 = ctrl.Rule(
-            memberAirTemperature["optimal"] & memberHumidity["dry"],
-            memberDelay["short"],
-        )
-        rule5 = ctrl.Rule(
-            memberAirTemperature["optimal"] & memberHumidity["optimal"],
-            memberDelay["normal"],
-        )
-        rule6 = ctrl.Rule(
-            memberAirTemperature["optimal"] & memberHumidity["moist"],
-            memberDelay["normal"],
-        )
-        rule7 = ctrl.Rule(
-            memberAirTemperature["cool"] & memberHumidity["dry"], memberDelay["normal"]
-        )
-        rule8 = ctrl.Rule(
-            memberAirTemperature["cool"] & memberHumidity["optimal"],
-            memberDelay["normal"],
-        )
-        rule9 = ctrl.Rule(
-            memberAirTemperature["cool"] & memberHumidity["moist"], memberDelay["long"]
+        delay_long = rule9
+
+        activation_short = np.fmin(delay_short, memberDelay_short)
+        activation_normal = np.fmin(delay_normal, memberDelay_normal)
+        activation_long = np.fmin(delay_long, memberDelay_long)
+
+        # Aggregated
+        aggregated = np.fmax(
+            activation_short, np.fmax(activation_normal, activation_long)
         )
 
-        # Regsiter rules
-        spraying_ctrl = ctrl.ControlSystem(
-            [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9]
-        )
-
-        # Register Control System
-        spraying_delay = ctrl.ControlSystemSimulation(spraying_ctrl)
-
-        # Get input Air Temperature & Humidity
-        spraying_delay.input["Air Temperature"] = airTemperature
-        spraying_delay.input["Humidity"] = humidity
-
-        # Calculate
-        spraying_delay.compute()
+        # Calculate spraying delay (Defuzzification with Centroid Method)
+        spraying_delay = fuzz.defuzz(memberDelay, aggregated, "centroid")
 
         # Return result as Decimal
-        return int(spraying_delay.output["Spraying Delay"])
+        return int(spraying_delay)
 
     def get_data(
         self, measurement: str = "first", field: str = "airTemperature"
