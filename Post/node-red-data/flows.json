@@ -42,7 +42,7 @@
             "c5e42c44d7ebe056",
             "1960f27e5879be7f"
         ],
-        "x": 554,
+        "x": 494,
         "y": 39,
         "w": 872,
         "h": 162
@@ -62,7 +62,7 @@
             "cdab0721afc84092"
         ],
         "x": 34,
-        "y": 1119,
+        "y": 839,
         "w": 792,
         "h": 82,
         "info": "# Update table each 10 second"
@@ -85,7 +85,7 @@
             "bb11821c5851a495"
         ],
         "x": 34,
-        "y": 939,
+        "y": 1259,
         "w": 1252,
         "h": 162
     },
@@ -104,10 +104,140 @@
             "d3d10d47d240a665",
             "46d97e573f2dbafc"
         ],
-        "x": 1474,
-        "y": 239,
+        "x": 34,
+        "y": 1439,
         "w": 732,
         "h": 202
+    },
+    {
+        "id": "1190b8304b39fb20",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Training Schedule",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "22bdfdf9af3cec94",
+            "208568a9a8487145",
+            "c572c62e3bc7d0db"
+        ],
+        "x": 34,
+        "y": 1659,
+        "w": 732,
+        "h": 82
+    },
+    {
+        "id": "80818ea1848bc60d",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Predict Schedule",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "21a3e2fa697eda18",
+            "823031718a380c15",
+            "a980d978498775cc"
+        ],
+        "x": 34,
+        "y": 1759,
+        "w": 732,
+        "h": 82
+    },
+    {
+        "id": "712eaa3f268f82a4",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Nutrient Pump Controll",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a01747745349e086",
+            "e8079ffd7dae2156",
+            "9afc8a9507db102d",
+            "ca094501277d0b96",
+            "dae84b9c51504f3e"
+        ],
+        "x": 34,
+        "y": 1159,
+        "w": 1012,
+        "h": 82
+    },
+    {
+        "id": "cf16a34e4e3aa852",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Pump Mode (Manual / Auto)",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "966dde961a135cbd",
+            "921ffe416433df5f",
+            "35cc5b709892f231",
+            "a23d4665892c5066",
+            "1000ab7abae8be5e",
+            "f9fc7a50a612c6be"
+        ],
+        "x": 34,
+        "y": 939,
+        "w": 512,
+        "h": 202
+    },
+    {
+        "id": "51a4cf60df77cc66",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Flow Monitoring",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c0fdf13ddf51a386",
+            "77d0234d6877c108",
+            "30de823cdfad7534",
+            "5306464457f18e6d",
+            "0977c7ffa81bdbdb",
+            "406f2dd9465b79d1",
+            "f99247d62c6acf92",
+            "0d0a4e47620efe72",
+            "3a7d8b17c577e4b1",
+            "de835b840eb85878",
+            "f78f28a51c3e9c93",
+            "1848ca0b284dbcea",
+            "75a79c35353d62b9",
+            "35f17538204de772",
+            "d7956814759e929e",
+            "21d52b8cc6ca014b",
+            "48d69c5ddf12a038",
+            "0719cddf1410f446",
+            "288dfe312c2d55ea",
+            "9b50a0c178fdf348"
+        ],
+        "x": 34,
+        "y": 219,
+        "w": 1332,
+        "h": 602
+    },
+    {
+        "id": "2934f6035f0922ad",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Input Dummy Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "be99efa4d153a295",
+            "449b5b2e16ce58c0",
+            "3d976b5622e526c3"
+        ],
+        "x": 1374,
+        "y": 39,
+        "w": 592,
+        "h": 82
     },
     {
         "id": "a0c6bd21a651f905",
@@ -411,7 +541,7 @@
         "retentionPolicyV18Flux": "",
         "org": "sgh",
         "bucket": "aeroponics",
-        "x": 910,
+        "x": 850,
         "y": 80,
         "wires": []
     },
@@ -427,7 +557,7 @@
             },
             {
                 "p": "measurement",
-                "v": "tds",
+                "v": "test",
                 "vt": "str"
             }
         ],
@@ -438,7 +568,7 @@
         "topic": "",
         "payload": "6.4",
         "payloadType": "num",
-        "x": 690,
+        "x": 630,
         "y": 80,
         "wires": [
             [
@@ -458,7 +588,7 @@
         "precision": "",
         "retentionPolicy": "",
         "org": "sgh",
-        "x": 1070,
+        "x": 1010,
         "y": 160,
         "wires": [
             [
@@ -480,7 +610,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1280,
+        "x": 1220,
         "y": 160,
         "wires": []
     },
@@ -506,7 +636,7 @@
         "topic": "aeroponics",
         "payload": "",
         "payloadType": "date",
-        "x": 700,
+        "x": 640,
         "y": 160,
         "wires": [
             [
@@ -520,14 +650,14 @@
         "z": "4e95b77d0b966b44",
         "g": "0b1defec19e46ef8",
         "name": "Set Query",
-        "func": "msg.query = `\nfrom(bucket: \"aeroponics\")\n    |> range(start: -12h)\n    |> filter(fn: (r) => r._measurement == \"tds\")\n`\nreturn msg;",
+        "func": "msg.query = `\nfrom(bucket: \"aeroponics\")\n    |> range(start: -12h)\n    |> filter(fn: (r) => r._measurement == \"test\")\n`\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 900,
+        "x": 840,
         "y": 160,
         "wires": [
             [
@@ -542,13 +672,13 @@
         "g": "b7ed9a5a877c4fa0",
         "influxdb": "a0c6bd21a651f905",
         "name": "Read",
-        "query": "from(bucket: \"aeroponics\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"first\")\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> limit(n: 100)\n  |> sort(columns: [\"_time\"], desc: true)\n  |> yield(name: \"mean\")",
+        "query": "from(bucket: \"aeroponics\")\n  |> range(start: -7d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"first\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)\n  |> limit(n: 100)\n  |> sort(columns: [\"_time\"], desc: true)\n  |> yield(name: \"mean\")",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
         "org": "sgh",
         "x": 290,
-        "y": 1160,
+        "y": 880,
         "wires": [
             [
                 "cdab0721afc84092"
@@ -578,7 +708,7 @@
         "payload": "iso",
         "payloadType": "date",
         "x": 130,
-        "y": 1160,
+        "y": 880,
         "wires": [
             [
                 "e081a0eac9cd5bf3"
@@ -603,7 +733,7 @@
         "selectionType": "none",
         "columns": [],
         "x": 730,
-        "y": 1160,
+        "y": 880,
         "wires": [
             []
         ]
@@ -622,7 +752,7 @@
         "finalize": "",
         "libs": [],
         "x": 500,
-        "y": 1160,
+        "y": 880,
         "wires": [
             [
                 "b432713c2282946f"
@@ -633,16 +763,17 @@
         "id": "c0fdf13ddf51a386",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Aeroponics",
-        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n// menghitung nilai TDS berdasarkan data dari sensor TDS\narrData.tds = getTds(arrData.tds, arrData.waterTemperature, arrData.nutrientPumpStatus)\n// menghitung nilai pH berdasarkan data dari sensor pH\narrData.ph = getPh(arrData.ph);\n\n// mengambil data pengontrol pompa dari context\npumpController = flow.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, arrData.tds, maxTDS, minTDS, arrData.airTemperature, arrData.humidity);\n\nresult = [\n    { payload: arrData.ph, topic: \"pH\" },\n    { payload: arrData.tds, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: arrData.waterTemperature, topic: \"Water Temperature\" },\n    { payload: arrData.airTemperature, topic: \"Air Temperature\" },\n    { payload: arrData.humidity, topic: \"Humidity\" },\n    { payload: arrData.fertilizer, topic: \"Fertilizer\" },\n    { payload: arrData.nutrient, topic: \"Nutrient\" },\n    { payload: arrData.fertilizerPumpStatus, topic: \"Fertilizer Pump Status\" },\n    { payload: arrData.nutrientPumpStatus, topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n    { payload: pumpData },\n]\n\nreturn result;\n\n/** \n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} temperature\n*/\nfunction getTds(data, temperature, pumpStatus) {\n    // Settings according to Node MCU ESP8266 \n    const kValue = 0.56;\n    const aref = 3.3;\n    const adcRange = 1024;  //setting according to Gravity TDS Master library\n    const tdsFactor = 0.5;\n    let voltage = data / adcRange * aref;\n    let ecValue = (133.42 * voltage * voltage * voltage - 255.86 * voltage * voltage + 857.39 * voltage) * kValue;\n    let ec = ecValue * (1.0 + 0.02 * (Math.round(temperature) - 25));\n    let tds = ec * tdsFactor;\n    // tds = (1.0374*tds) - 9.5339 \n if (pumpStatus === 1) {\n        tds = tds - 200\n    }\n\n    return Math.round(tds);\n    // return 1200 + (Math.floor(Math.random() * (30 - 10) + 10)) \n}\n\n/**\n * Fungsi untuk menghitung nilai PH\n * \n * @param {number} data\n * @return {number} ph\n */\nfunction getPh(data) {\n    // let phValue = (0.1111 * data) + 1.000\n    let phValue = (-0.01947 * data) + 7.01\n\n    return Number(phValue.toFixed(2))\n}\n\nfunction savetoDatabase(data) {\n    Object.assign(data, {\n        \"minTds\": flow.get(\"minTDS\"),\n        \"maxTds\": flow.get(\"maxTDS\")\n    })\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, airTemp, humidity) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump(airTemp, humidity)\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump(airTemp, humidity) {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 6) {\n        return 0;\n    }\n\n    if (airTemp > 28 && humidity < 65) {\n        if (diffMinute >= 6 && diffMinute <= 15) {\n            return 1;\n        }\n\n        if (diffMinute > 15) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else if (airTemp < 25 && humidity > 78) {\n        if (diffMinute >= 6 && diffMinute <= 45) {\n            return 1;\n        }\n\n        if (diffMinute > 45) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else {\n        if (diffMinute >= 6 && diffMinute <= 30) {\n            return 1;\n        }\n\n        if (diffMinute > 30) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    }\n    // }\n    // if (diffMinute >= 4 && diffMinute <= 5) {\n    //     return 1;\n    // }\n\n    // if (diffMinute > 5) {\n    //     context.set('setDate', new Date())\n    //     return 0;\n    // }\n}",
-        "outputs": 13,
+        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\narrData.waterTemperature = getWaterTemperature(arrData.waterTemperature)\n\n// menghitung nilai TDS berdasarkan data dari sensor TDS\narrData.tds = getTds(arrData.tds, arrData.waterTemperature)\nflow.set('tds', arrData.tds)\n// menghitung nilai pH berdasarkan data dari sensor pH\narrData.ph = getPh(arrData.ph);\n\n// mengambil data pengontrol pompa dari context\npumpController = flow.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, arrData.tds, maxTDS, minTDS, arrData.airTemperature, arrData.humidity);\n\nresult = [\n    { payload: arrData.ph, topic: \"pH\" },\n    { payload: arrData.tds, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: arrData.waterTemperature, topic: \"Water Temperature\" },\n    { payload: arrData.airTemperature, topic: \"Air Temperature\" },\n    { payload: arrData.humidity, topic: \"Humidity\" },\n    { payload: arrData.fertilizer, topic: \"Fertilizer\" },\n    { payload: arrData.nutrient, topic: \"Nutrient\" },\n    { payload: arrData.fertilizerPumpStatus, topic: \"Fertilizer Pump Status\" },\n    { payload: arrData.nutrientPumpStatus, topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n]\n\nreturn result;\n\nfunction getWaterTemperature(data) {\n    if (data === -127) {\n        return context.get('waterTemperature')\n    } else {\n        context.set('waterTemperature', data)\n\n        return data\n    }\n}\n\n/** \n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} temperature\n*/\nfunction getTds(data, temperature) {\n    let tds;\n    \n    if (flow.get('nutrientPumpStatus') == \"0\") {\n        tds = flow.get(\"tds\")\n    } else {\n        const kValue = 0.79;\n        const aref = 3.3;\n        const adcRange = 1024;  //setting according to Gravity TDS Master library\n        const tdsFactor = 0.5;\n        let voltage = data / adcRange * aref;\n        let ecValue = (133.42 * voltage * voltage * voltage - 255.86 * voltage * voltage + 857.39 * voltage) * kValue;\n        let ec = ecValue * (1.0 + 0.02 * (temperature - 25));\n        tds = ec * tdsFactor;\n\n        tds = Math.round(tds)\n\n        flow.set(\"tds\", tds)\n    }\n\n    return tds;\n}\n\n/**\n * Fungsi untuk menghitung nilai PH\n * \n * @param {number} data\n * @return {number} ph\n */\nfunction getPh(data) {\n    // let phValue = (0.1111 * data) + 1.000\n    let phValue = (-0.01947 * data) + 7.01\n\n    return Number(phValue.toFixed(2))\n}\n\nfunction savetoDatabase(data) {\n    Object.assign(data, {\n        \"minTds\": flow.get(\"minTDS\"),\n        \"maxTds\": flow.get(\"maxTDS\")\n    })\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, airTemp, humidity) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump(airTemp, humidity)\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump(airTemp, humidity) {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 6) {\n        return 0;\n    }\n\n    if (airTemp > 28 && humidity < 65) {\n        if (diffMinute >= 6 && diffMinute <= 15) {\n            return 1;\n        }\n\n        if (diffMinute > 15) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else if (airTemp < 25 && humidity > 78) {\n        if (diffMinute >= 6 && diffMinute <= 45) {\n            return 1;\n        }\n\n        if (diffMinute > 45) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else {\n        if (diffMinute >= 6 && diffMinute <= 30) {\n            return 1;\n        }\n\n        if (diffMinute > 30) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    }\n    // }\n    // if (diffMinute >= 4 && diffMinute <= 5) {\n    //     return 1;\n    // }\n\n    // if (diffMinute > 5) {\n    //     context.set('setDate', new Date())\n    //     return 0;\n    // }\n}",
+        "outputs": 12,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set('setDate', new Date('2023-06-25T10:00:00'));\ncontext.set('pumpController', false);\n// nilai max 800 dan min 600 diatur berdasarkan anjuran dari Pupuk ABMIX\ncontext.set('fertilizerPump', 1);\ncontext.set('setTimeDecrease', new Date('2023-06-25T10:00:00'))",
+        "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 520,
+        "x": 650,
+        "y": 540,
         "wires": [
             [
                 "0977c7ffa81bdbdb",
@@ -682,9 +813,6 @@
             ],
             [
                 "5306464457f18e6d"
-            ],
-            [
-                "a01747745349e086"
             ]
         ],
         "outputLabels": [
@@ -699,8 +827,7 @@
             "Nutrient",
             "Fertilizer Pump",
             "Nutrient Pump",
-            "Save to Database",
-            "Pump Data"
+            "Save to Database"
         ]
     },
     {
@@ -708,6 +835,7 @@
         "type": "inject",
         "z": "4e95b77d0b966b44",
         "d": true,
+        "g": "2934f6035f0922ad",
         "name": "Trigger",
         "props": [
             {
@@ -725,8 +853,8 @@
         "topic": "data",
         "payload": "",
         "payloadType": "str",
-        "x": 140,
-        "y": 260,
+        "x": 1480,
+        "y": 80,
         "wires": [
             [
                 "449b5b2e16ce58c0"
@@ -738,6 +866,7 @@
         "type": "function",
         "z": "4e95b77d0b966b44",
         "d": true,
+        "g": "2934f6035f0922ad",
         "name": "Dummy Data",
         "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.random() * (max - min) + min\n\n    temp = temp.toFixed(2)\n\n    return temp\n}\n\ndata = String(randomInt(0, 100.00)) + \"|\" + String(Math.round(randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")))) + \"|\" + String(randomInt(1, 14)) + \"|\" + String(randomInt(0, 100)) + \"|\" + String(randomInt(20, 40)) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1)))\n\n// data = {\n//     'nutrientTemperature': ,\n//     'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n//     'tds': flow.get('dummyTDS'),\n//     'ph': randomInt(1, 14),\n//     'humidity': randomInt(0, 100),\n//     'airTemperature': randomInt(10, 50),\n//     'fertilizer': Math.round(randomInt(0, 1)),\n//     'nutrient': Math.round(randomInt(0, 1)),\n//     'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n//     'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n// }\n\nmsg.payload = data\n\nreturn msg",
         "outputs": 1,
@@ -746,8 +875,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 260,
+        "x": 1650,
+        "y": 80,
         "wires": [
             [
                 "3d976b5622e526c3"
@@ -758,6 +887,7 @@
         "id": "77d0234d6877c108",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Set Data",
         "func": "/* \n    Untuk memfilter data data yang tidak dapat digunakan dalam sister\n    Terdapat pesan yang masuk ke mqtt tanpa data\n */\n\n// Inisialisasi variabel\nlet data, arrData, dataSplit;\n// mengambil data dari topik AeroponicsSensor\"\nif (msg.topic == \"AeroponicsSensor\") {\n    data = msg.payload\n    msg.topic = 'data'\n}\n\n// Melakukan cek apakah datanya ada\nif (data != undefined) {\n    //Memisahkan data berdasarkan tanda |\n    dataSplit = data.split(\"|\")\n    // Cek apakah data yang diterima lengkap\n    if (dataSplit.length == 9) {\n        // Menyimpan data dalam array\n        arrData = {\n            'waterTemperature': Number(dataSplit[0]),\n            'tds': Number(dataSplit[1]),\n            'ph': Number(dataSplit[2]),\n            'humidity': Number(dataSplit[3]),\n            'airTemperature': Number(dataSplit[4]),\n            'fertilizer': Number(dataSplit[5]),\n            'nutrient': Number(dataSplit[6]),\n            'nutrientPumpStatus': Number(dataSplit[7]),\n            'fertilizerPumpStatus': Number(dataSplit[8]),\n            // 'systemControl': context.get('systemController'),\n        }\n        /* \n            Menyimpan array dalam penyimpanan sementara dengan tipe flow\n            Digunakan flow karena datanya akan digunakan pada node yang tidak terhubung dengan node ini namum masih dalam 1 flow\n         */\n        msg.payload = arrData;\n    }\n}\n\nreturn msg",
         "outputs": 1,
@@ -766,8 +896,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\n// flow.set('dummyTDS', 1109)",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 520,
+        "x": 440,
+        "y": 540,
         "wires": [
             [
                 "c0fdf13ddf51a386"
@@ -778,6 +908,7 @@
         "id": "30de823cdfad7534",
         "type": "mqtt in",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Aeroponics Sensor",
         "topic": "AeroponicsSensor",
         "qos": "0",
@@ -787,8 +918,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 190,
-        "y": 520,
+        "x": 150,
+        "y": 540,
         "wires": [
             [
                 "77d0234d6877c108"
@@ -799,6 +930,8 @@
         "id": "5306464457f18e6d",
         "type": "influxdb out",
         "z": "4e95b77d0b966b44",
+        "d": true,
+        "g": "51a4cf60df77cc66",
         "influxdb": "a0c6bd21a651f905",
         "name": "Save to Database",
         "measurement": "first",
@@ -809,8 +942,8 @@
         "retentionPolicyV18Flux": "",
         "org": "sgh",
         "bucket": "aeroponics",
-        "x": 970,
-        "y": 760,
+        "x": 930,
+        "y": 780,
         "wires": []
     },
     {
@@ -853,7 +986,7 @@
         "splitLayout": true,
         "className": "",
         "x": 610,
-        "y": 1020,
+        "y": 1340,
         "wires": [
             [
                 "94c8562cc4c33fbe"
@@ -874,7 +1007,7 @@
         "finalize": "",
         "libs": [],
         "x": 360,
-        "y": 1020,
+        "y": 1340,
         "wires": [
             [
                 "a81cdd80fe3cbedb"
@@ -895,7 +1028,7 @@
         "finalize": "",
         "libs": [],
         "x": 880,
-        "y": 1020,
+        "y": 1340,
         "wires": [
             [
                 "125d46208a3ffb2e"
@@ -926,7 +1059,7 @@
         "className": "",
         "name": "",
         "x": 1150,
-        "y": 1060,
+        "y": 1380,
         "wires": [
             []
         ]
@@ -950,7 +1083,7 @@
         "color": "#717171",
         "className": "",
         "x": 1160,
-        "y": 1020,
+        "y": 1340,
         "wires": []
     },
     {
@@ -972,7 +1105,7 @@
         "color": "#717171",
         "className": "",
         "x": 1160,
-        "y": 980,
+        "y": 1300,
         "wires": []
     },
     {
@@ -993,12 +1126,12 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": "1",
+        "onceDelay": "30",
         "topic": "",
         "payload": "iso",
         "payloadType": "date",
         "x": 150,
-        "y": 1020,
+        "y": 1340,
         "wires": [
             [
                 "2b16e450599d9bc3"
@@ -1009,6 +1142,7 @@
         "id": "0977c7ffa81bdbdb",
         "type": "ui-chart",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "group": "0754707ca88f42b4",
         "name": "Chart pH",
         "label": "pH",
@@ -1024,8 +1158,8 @@
         "xAxisFormatType": "HH:mm",
         "yAxisLabel": "",
         "yAxisProperty": "",
-        "ymin": "0",
-        "ymax": "14",
+        "ymin": "",
+        "ymax": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "false",
@@ -1056,8 +1190,8 @@
         "width": "3",
         "height": "4",
         "className": "",
-        "x": 940,
-        "y": 240,
+        "x": 900,
+        "y": 260,
         "wires": [
             []
         ]
@@ -1066,6 +1200,7 @@
         "id": "406f2dd9465b79d1",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge pH",
         "group": "0754707ca88f42b4",
         "order": 2,
@@ -1100,14 +1235,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 950,
-        "y": 280,
+        "x": 910,
+        "y": 300,
         "wires": []
     },
     {
         "id": "f99247d62c6acf92",
         "type": "ui-chart",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "group": "928253dc2f736af4",
         "name": "Chart TDS",
         "label": "TDS",
@@ -1123,8 +1259,8 @@
         "xAxisFormatType": "HH:mm",
         "yAxisLabel": "",
         "yAxisProperty": "",
-        "ymin": "0",
-        "ymax": "2500",
+        "ymin": "",
+        "ymax": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "false",
@@ -1155,8 +1291,8 @@
         "width": "3",
         "height": "4",
         "className": "",
-        "x": 950,
-        "y": 320,
+        "x": 910,
+        "y": 340,
         "wires": [
             []
         ]
@@ -1165,6 +1301,7 @@
         "id": "0d0a4e47620efe72",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge TDS",
         "group": "928253dc2f736af4",
         "order": 2,
@@ -1199,14 +1336,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 950,
-        "y": 360,
+        "x": 910,
+        "y": 380,
         "wires": []
     },
     {
         "id": "3a7d8b17c577e4b1",
         "type": "ui-chart",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "group": "928253dc2f736af4",
         "name": "Chart Water Temperature",
         "label": "Water Temperature",
@@ -1222,8 +1360,8 @@
         "xAxisFormatType": "HH:mm",
         "yAxisLabel": "",
         "yAxisProperty": "",
-        "ymin": "0",
-        "ymax": "40",
+        "ymin": "",
+        "ymax": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "false",
@@ -1254,8 +1392,8 @@
         "width": "3",
         "height": "4",
         "className": "",
-        "x": 990,
-        "y": 400,
+        "x": 950,
+        "y": 420,
         "wires": [
             []
         ]
@@ -1264,6 +1402,7 @@
         "id": "de835b840eb85878",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge Water Temperature",
         "group": "928253dc2f736af4",
         "order": 4,
@@ -1298,14 +1437,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1000,
-        "y": 440,
+        "x": 960,
+        "y": 460,
         "wires": []
     },
     {
         "id": "f78f28a51c3e9c93",
         "type": "ui-chart",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "group": "0754707ca88f42b4",
         "name": "Chart Air Temperature",
         "label": "Air Temperature",
@@ -1321,8 +1461,8 @@
         "xAxisFormatType": "HH:mm",
         "yAxisLabel": "",
         "yAxisProperty": "",
-        "ymin": "0",
-        "ymax": "40",
+        "ymin": "",
+        "ymax": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "false",
@@ -1353,8 +1493,8 @@
         "width": "3",
         "height": "4",
         "className": "",
-        "x": 1260,
-        "y": 460,
+        "x": 1220,
+        "y": 480,
         "wires": [
             []
         ]
@@ -1363,6 +1503,7 @@
         "id": "1848ca0b284dbcea",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge Air Tempetature",
         "group": "0754707ca88f42b4",
         "order": 4,
@@ -1397,14 +1538,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1270,
-        "y": 500,
+        "x": 1230,
+        "y": 520,
         "wires": []
     },
     {
         "id": "75a79c35353d62b9",
         "type": "ui-chart",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "group": "0754707ca88f42b4",
         "name": "Chart Humidity",
         "label": "Humidity",
@@ -1420,8 +1562,8 @@
         "xAxisFormatType": "HH:mm",
         "yAxisLabel": "",
         "yAxisProperty": "",
-        "ymin": "0",
-        "ymax": "100",
+        "ymin": "",
+        "ymax": "",
         "action": "append",
         "stackSeries": false,
         "pointShape": "false",
@@ -1452,8 +1594,8 @@
         "width": "3",
         "height": "4",
         "className": "",
-        "x": 1240,
-        "y": 540,
+        "x": 1200,
+        "y": 560,
         "wires": [
             []
         ]
@@ -1462,6 +1604,7 @@
         "id": "35f17538204de772",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge Humidity",
         "group": "0754707ca88f42b4",
         "order": 6,
@@ -1496,14 +1639,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1240,
-        "y": 580,
+        "x": 1200,
+        "y": 600,
         "wires": []
     },
     {
         "id": "d7956814759e929e",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge Fertilizer Detector",
         "group": "928253dc2f736af4",
         "order": 5,
@@ -1534,14 +1678,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 990,
-        "y": 600,
+        "x": 950,
+        "y": 620,
         "wires": []
     },
     {
         "id": "21d52b8cc6ca014b",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Gauge Nutrient Detector",
         "group": "928253dc2f736af4",
         "order": 6,
@@ -1572,14 +1717,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 990,
-        "y": 640,
+        "x": 950,
+        "y": 660,
         "wires": []
     },
     {
         "id": "48d69c5ddf12a038",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Fertilizer Pump Status",
         "group": "ce50fe1a67b27550",
         "order": 1,
@@ -1610,14 +1756,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 980,
-        "y": 680,
+        "x": 940,
+        "y": 700,
         "wires": []
     },
     {
         "id": "0719cddf1410f446",
         "type": "ui-gauge",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Nutrient Pump Status",
         "group": "ce50fe1a67b27550",
         "order": 2,
@@ -1648,14 +1795,15 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 980,
-        "y": 720,
+        "x": 940,
+        "y": 740,
         "wires": []
     },
     {
         "id": "966dde961a135cbd",
         "type": "ui-switch",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Switch Pump Controll",
         "label": "Pump Mode (Manual)",
         "group": "ad6a52b7f270c94f",
@@ -1676,8 +1824,8 @@
         "offvalueType": "bool",
         "officon": "",
         "offcolor": "",
-        "x": 200,
-        "y": 600,
+        "x": 160,
+        "y": 980,
         "wires": [
             [
                 "921ffe416433df5f"
@@ -1688,22 +1836,24 @@
         "id": "921ffe416433df5f",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Set Topic for Pump Controller",
         "func": "// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nflow.set(\"pumpController\", msg.payload)",
         "outputs": 0,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"pumpController\", true)",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 600,
+        "x": 400,
+        "y": 980,
         "wires": []
     },
     {
         "id": "a01747745349e086",
         "type": "mqtt out",
         "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
         "name": "Pump Controller",
         "topic": "systemController",
         "qos": "1",
@@ -1714,8 +1864,8 @@
         "correl": "",
         "expiry": "",
         "broker": "95baad91265b5be6",
-        "x": 960,
-        "y": 800,
+        "x": 940,
+        "y": 1200,
         "wires": []
     },
     {
@@ -1723,6 +1873,7 @@
         "type": "mqtt out",
         "z": "4e95b77d0b966b44",
         "d": true,
+        "g": "2934f6035f0922ad",
         "name": "Dummy Publish",
         "topic": "AeroponicsSensor",
         "qos": "1",
@@ -1733,8 +1884,8 @@
         "correl": "",
         "expiry": "",
         "broker": "95baad91265b5be6",
-        "x": 520,
-        "y": 260,
+        "x": 1860,
+        "y": 80,
         "wires": []
     },
     {
@@ -1749,8 +1900,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1600,
-        "y": 280,
+        "x": 160,
+        "y": 1480,
         "wires": [
             [
                 "afdf43bcb751f62e"
@@ -1763,12 +1914,12 @@
         "z": "4e95b77d0b966b44",
         "g": "25804cb46152d20d",
         "name": "Capture Image",
-        "pyfile": "/home/kohaku/Documents/aeroponics/autoCapture.py",
+        "pyfile": "/home/kohaku/aeroponics_images/autoCapture.py",
         "virtualenv": "",
         "continuous": false,
         "stdInData": false,
-        "x": 1860,
-        "y": 340,
+        "x": 420,
+        "y": 1540,
         "wires": [
             [
                 "62d7c326261601ad"
@@ -1789,8 +1940,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2080,
-        "y": 340,
+        "x": 640,
+        "y": 1540,
         "wires": []
     },
     {
@@ -1805,8 +1956,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1600,
-        "y": 340,
+        "x": 160,
+        "y": 1540,
         "wires": [
             [
                 "afdf43bcb751f62e"
@@ -1825,8 +1976,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 1600,
-        "y": 400,
+        "x": 160,
+        "y": 1600,
         "wires": [
             [
                 "afdf43bcb751f62e"
@@ -1837,6 +1988,7 @@
         "id": "35cc5b709892f231",
         "type": "ui-switch",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Switch Nutrient Pump",
         "label": "Activate Nutrient Pump?",
         "group": "ad6a52b7f270c94f",
@@ -1857,8 +2009,8 @@
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
-        "x": 200,
-        "y": 660,
+        "x": 160,
+        "y": 1040,
         "wires": [
             [
                 "a23d4665892c5066"
@@ -1869,22 +2021,24 @@
         "id": "a23d4665892c5066",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Set Nutrient Pump",
-        "func": "flow.set(\"nutrientPumpStatus\", msg.payload)\n\nreturn msg;",
+        "func": "flow.set(\"nutrientPumpStatus\", msg.payload)\n",
         "outputs": 0,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 660,
+        "x": 370,
+        "y": 1040,
         "wires": []
     },
     {
         "id": "1000ab7abae8be5e",
         "type": "ui-switch",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Switch Fertilizer Pump",
         "label": "Activate Fertilizer Pump?",
         "group": "ad6a52b7f270c94f",
@@ -1905,8 +2059,8 @@
         "offvalueType": "str",
         "officon": "",
         "offcolor": "",
-        "x": 200,
-        "y": 720,
+        "x": 160,
+        "y": 1100,
         "wires": [
             [
                 "f9fc7a50a612c6be"
@@ -1917,22 +2071,24 @@
         "id": "f9fc7a50a612c6be",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
         "name": "Set Fertilizer Pump",
-        "func": "flow.set(\"fertilizerPumpStatus\", msg.payload)\n\nreturn msg;",
+        "func": "flow.set(\"fertilizerPumpStatus\", msg.payload)",
         "outputs": 0,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 720,
+        "x": 370,
+        "y": 1100,
         "wires": []
     },
     {
         "id": "288dfe312c2d55ea",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Check Value Air Temperature",
         "func": "// Mengecek nilai Air Temperature. \n// Jika NaN maka mengembalikan nilai 0, jika tidak maka mengembalikan nilai asli\nif (Number.isNaN(msg.payload)) {\n    msg.payload = 0;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1941,8 +2097,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 480,
+        "x": 960,
+        "y": 500,
         "wires": [
             [
                 "f78f28a51c3e9c93",
@@ -1954,6 +2110,7 @@
         "id": "9b50a0c178fdf348",
         "type": "function",
         "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
         "name": "Check Value Humidity",
         "func": "// Mengecek nilai Humidity. \n// Jika NaN maka mengembalikan nilai 0, jika tidak maka mengembalikan nilai asli\nif (Number.isNaN(msg.payload)) {\n    msg.payload = 0;\n}\n\nreturn msg;",
         "outputs": 1,
@@ -1962,12 +2119,226 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 980,
-        "y": 560,
+        "x": 940,
+        "y": 580,
         "wires": [
             [
                 "75a79c35353d62b9",
                 "35f17538204de772"
+            ]
+        ]
+    },
+    {
+        "id": "22bdfdf9af3cec94",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Trigger Training",
+        "props": [],
+        "repeat": "",
+        "crontab": "00 01 * * 1,4",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 1700,
+        "wires": [
+            [
+                "208568a9a8487145"
+            ]
+        ]
+    },
+    {
+        "id": "208568a9a8487145",
+        "type": "pythonshell in",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Training Model",
+        "pyfile": "/home/kohaku/skripsi/Post/Index/training.py",
+        "virtualenv": "/home/kohaku/skripsi/Post/Index/venv",
+        "continuous": false,
+        "stdInData": false,
+        "x": 400,
+        "y": 1700,
+        "wires": [
+            [
+                "c572c62e3bc7d0db"
+            ]
+        ]
+    },
+    {
+        "id": "c572c62e3bc7d0db",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Training Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "21a3e2fa697eda18",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Trigger Predict",
+        "props": [],
+        "repeat": "",
+        "crontab": "45 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1800,
+        "wires": [
+            [
+                "823031718a380c15"
+            ]
+        ]
+    },
+    {
+        "id": "823031718a380c15",
+        "type": "pythonshell in",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Predict Future",
+        "pyfile": "/home/kohaku/skripsi/Post/Index/predict.py",
+        "virtualenv": "/home/kohaku/skripsi/Post/Index/venv",
+        "continuous": false,
+        "stdInData": false,
+        "x": 400,
+        "y": 1800,
+        "wires": [
+            [
+                "a980d978498775cc"
+            ]
+        ]
+    },
+    {
+        "id": "a980d978498775cc",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Predict Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "e8079ffd7dae2156",
+        "type": "csv",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Parse CSV",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 590,
+        "y": 1200,
+        "wires": [
+            [
+                "dae84b9c51504f3e"
+            ]
+        ]
+    },
+    {
+        "id": "9afc8a9507db102d",
+        "type": "file in",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Read Prediction CSV",
+        "filename": "/home/kohaku/skripsi/Post/Index/data/Prediction.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 380,
+        "y": 1200,
+        "wires": [
+            [
+                "e8079ffd7dae2156"
+            ]
+        ]
+    },
+    {
+        "id": "ca094501277d0b96",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Trigger Pump",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "prediction",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 1200,
+        "wires": [
+            [
+                "9afc8a9507db102d"
+            ]
+        ]
+    },
+    {
+        "id": "dae84b9c51504f3e",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Compare",
+        "func": "let predict, tds, maxTDS, minTDS, pumpController, now;\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n\npumpController = flow.get(\"pumpController\")\n\nnow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\npredict = msg.payload\n\ntds = flow.get('tds')\n\nmsg.payload = managementPump(pumpController, tds, maxTDS, minTDS, predict)\n\nreturn msg;\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, predict) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        setSystem = nutrientPump(predict) + \"|\" + fertilizerPump(tdsValue, maxTDS, minTDS)\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    let status, q1, q3;\n\n    q1 = minTDS + ((maxTDS - minTDS) * 0.25)\n    q3 = minTDS + ((maxTDS - minTDS) * 0.75)\n\n    if (tdsValue < q1) {\n        status = \"0\"\n    } else if (tdsValue >= q3) {\n        status = \"1\"\n    } else {\n        status = \"1\"\n    }\n\n    flow.set(\"fertilizerPumpStatus\", status)\n\n    return status\n}\n\nfunction nutrientPump(predict) {\n    let status;\n\n    let dateNow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\n    // Modifikasi format datetime di array agar sesuai dengan format target\n    const match = predict.find(record => {\n        // Ambil substring datetime dari array hingga detik diubah menjadi \"00\"\n        const formattedDatetime = record.datetime.substring(0, 17) + \"00\";\n        return formattedDatetime === dateNow;\n    });\n\n    if (match) {\n        status = match.is_pump_not_active.toString()\n    } else {\n        status = \"1\"\n    }\n\n    flow.set(\"nutrientPumpStatus\", status)\n\n    return status\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "moment",
+                "module": "moment"
+            }
+        ],
+        "x": 760,
+        "y": 1200,
+        "wires": [
+            [
+                "a01747745349e086"
             ]
         ]
     }
