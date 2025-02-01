@@ -67,6 +67,17 @@ class AdaptiveControll:
         >>> spraying_delay = self.FuzzyLogicNutrientPump(25, 78)
         >>> print(f"Recommended Spraying Delay: {spraying_delay} seconds")
         """
+        # Check input value
+        if airTemperature < 0:
+            airTemperature = 0
+        elif airTemperature > 45:
+            airTemperature = 45
+
+        if humidity < 0:
+            humidity = 0
+        elif humidity > 100:
+            humidity = 100
+
         # Defining membership scope
         memberAirTemperature = np.arange(0, 45 + 1)
         memberHumidity = np.arange(0, 100 + 1)
@@ -619,7 +630,7 @@ class AdaptiveControll:
 
             last_iter -= last_index
 
-        return last_iter
+        return np.absolute(last_iter)
 
     def compute(self):
         """
@@ -639,7 +650,7 @@ class AdaptiveControll:
 
         env_iter = Path(".env")
 
-        value = 1
+        value = np.nan
 
         for iter in range(len(df)):
             if iter == index and num_active < 5:
@@ -647,7 +658,7 @@ class AdaptiveControll:
 
                 index += 1
                 num_active += 1
-            elif num_active == 5:
+            elif iter == index and num_active >= 5:
                 value = 1
 
                 delay = self.FuzzyLogicNutrientPump(
@@ -664,12 +675,14 @@ class AdaptiveControll:
 
                 index += delay
                 num_active = 0
+            else:
+                value = 1
 
             result.append(value)
 
         result = np.array(result)
 
-        df["is_pump_not_active"] = result
+        df["is_pump_not_active"] = result.astype(int)
 
         filepath = Path("data/Prediction.csv")
         filepath.parent.mkdir(parents=True, exist_ok=True)
