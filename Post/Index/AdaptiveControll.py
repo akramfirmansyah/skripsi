@@ -560,7 +560,7 @@ class AdaptiveControll:
 
         >>> df = adap.single_predict(model, "airTemperaturePrediction")
         """
-        startdate = datetime.now().strftime("%Y-%m-%d, %H:%M:%S")
+        startdate = datetime.now().strftime("%Y-%m-%d, %H:%M:00")
         date_range = pd.date_range(start=startdate, periods=(60 * 24), freq="min")
 
         df_future = pd.DataFrame({"datetime": date_range})
@@ -676,7 +676,7 @@ class AdaptiveControll:
         if filepath.exists():
             df.to_csv(filepath, mode="a", header=False)
         else:
-            df.to_csv(filepath, mode="w")
+            df.to_csv(filepath)
 
 
 # Main fuction in Class Adaptive Controll

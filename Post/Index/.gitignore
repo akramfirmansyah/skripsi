@@ -9,3 +9,4 @@ XGBoots/*
 # File
 *.ipynb
 .env
+*.csv
