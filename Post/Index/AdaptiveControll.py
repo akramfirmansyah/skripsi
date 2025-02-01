@@ -81,7 +81,7 @@ class AdaptiveControll:
         # Defining membership scope
         memberAirTemperature = np.arange(0, 45 + 1)
         memberHumidity = np.arange(0, 100 + 1)
-        memberDelay = np.arange(0, 45 + 1)
+        memberDelay = np.arange(10, 45 + 1)
 
         # Create Membership Air Temperature
         memberAirTemperature_cool = fuzz.trapmf(memberAirTemperature, [0, 0, 13, 18])
@@ -96,8 +96,8 @@ class AdaptiveControll:
         memberHumidity_moist = fuzz.trapmf(memberHumidity, [80, 85, 100, 100])
 
         # Create Membership Spraying Delay
-        memberDelay_short = fuzz.trapmf(memberDelay, [0, 0, 10, 15])
-        memberDelay_normal = fuzz.trapmf(memberDelay, [10, 15, 30, 35])
+        memberDelay_short = fuzz.trapmf(memberDelay, [10, 10, 15, 20])
+        memberDelay_normal = fuzz.trapmf(memberDelay, [15, 20, 30, 35])
         memberDelay_long = fuzz.trapmf(memberDelay, [30, 35, 45, 45])
 
         # Calculating the degree of membership Air Temperature
