@@ -1,1 +1,9 @@
+# Ignore all images in this directory
 *.jpeg
+*.png
+*.gif
+*.jpg
+*.bmp
+*.tiff
+*.svg
+*.webp
