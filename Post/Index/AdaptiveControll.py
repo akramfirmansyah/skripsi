@@ -1,7 +1,6 @@
 from datetime import datetime
 from dotenv import load_dotenv, set_key
 from pathlib import Path
-from skfuzzy import control as ctrl
 from sklearn.metrics import (
     mean_absolute_error,
     mean_absolute_percentage_error,
@@ -10,9 +9,7 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 
 import csv
-import glob
 import influxdb_client
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
@@ -91,12 +88,12 @@ class AdaptiveControll:
         memberAirTemperature_hot = fuzz.trapmf(memberAirTemperature, [25, 30, 45, 45])
 
         # Create Membership Humidity
-        memberHumidity_dry = fuzz.trapmf(memberHumidity, [0, 0, 65, 70])
-        memberHumidity_optimal = fuzz.trapmf(memberHumidity, [65, 70, 80, 85])
+        memberHumidity_dry = fuzz.trapmf(memberHumidity, [0, 0, 55, 60])
+        memberHumidity_optimal = fuzz.trapmf(memberHumidity, [55, 60, 80, 85])
         memberHumidity_moist = fuzz.trapmf(memberHumidity, [80, 85, 100, 100])
 
         # Create Membership Spraying Delay
-        memberDelay_short = fuzz.trapmf(memberDelay, [10, 10, 15, 20])
+        memberDelay_short = fuzz.trapmf(memberDelay, [5, 5, 15, 20])
         memberDelay_normal = fuzz.trapmf(memberDelay, [15, 20, 30, 35])
         memberDelay_long = fuzz.trapmf(memberDelay, [30, 35, 45, 45])
 
