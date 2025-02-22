@@ -78,7 +78,7 @@ class AdaptiveControll:
         # Defining membership scope
         memberAirTemperature = np.arange(0, 45 + 1)
         memberHumidity = np.arange(0, 100 + 1)
-        memberDelay = np.arange(10, 45 + 1)
+        memberDelay = np.arange(5, 45 + 1)
 
         # Create Membership Air Temperature
         memberAirTemperature_cool = fuzz.trapmf(memberAirTemperature, [0, 0, 13, 18])
