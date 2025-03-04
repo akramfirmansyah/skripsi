@@ -283,15 +283,17 @@ class AdaptiveControll:
         >>> df = adap.replace_outlier(data, "temperature")
         >>> df.head()
         """
-        q1, q3 = data[f"{column}"].quantile(0.25), data[f"{column}"].quantile(0.75)
+        temp = data.copy()
+
+        q1, q3 = temp[f"{column}"].quantile(0.25), temp[f"{column}"].quantile(0.75)
         iqr = q3 - q1
         lower_limit = q1 - 1.5 * iqr
         upper_limit = q3 + 1.5 * iqr
 
-        data.loc[data[f"{column}"] > upper_limit, f"{column}"] = upper_limit
-        data.loc[data[f"{column}"] < lower_limit, f"{column}"] = lower_limit
+        temp.loc[temp[f"{column}"] > upper_limit, f"{column}"] = upper_limit
+        temp.loc[temp[f"{column}"] < lower_limit, f"{column}"] = lower_limit
 
-        return data
+        return temp
 
     def fill_na(self, data: pd.DataFrame, column: str) -> pd.DataFrame:
         """
