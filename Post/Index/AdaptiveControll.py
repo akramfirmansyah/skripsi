@@ -395,14 +395,14 @@ class AdaptiveControll:
         >>> model.predict(x_test)
         """
         model = xgb.XGBRegressor(
-            n_estimators=2500,
+            n_estimators=1000,
             learning_rate=0.01,
-            max_depth=3,
-            subsample=1.0,
-            colsample_bytree=1.0,
-            gamma=0,
-            reg_alpha=1,
-            reg_lambda=2,
+            max_depth=10,
+            subsample=1,
+            colsample_bytree=1,
+            gamma=2.5,
+            reg_alpha=0,
+            reg_lambda=7,
         )
 
         model.fit(X_train, y_train)
