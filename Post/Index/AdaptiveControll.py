@@ -52,9 +52,9 @@ class AdaptiveControll:
         | Hot             | Moist      | Normal         |
         | Optimal         | Dry        | Short          |
         | Optimal         | Optimal    | Normal         |
-        | Optimal         | Moist      | Normal         |
+        | Optimal         | Moist      | Long           |
         | Cool            | Dry        | Normal         |
-        | Cool            | Optimal    | Normal         |
+        | Cool            | Optimal    | Long           |
         | Cool            | Moist      | Long           |
 
         Example:
@@ -93,8 +93,8 @@ class AdaptiveControll:
         memberHumidity_moist = fuzz.trapmf(memberHumidity, [80, 85, 100, 100])
 
         # Create Membership Spraying Delay
-        memberDelay_short = fuzz.trapmf(memberDelay, [5, 5, 15, 20])
-        memberDelay_normal = fuzz.trapmf(memberDelay, [15, 20, 30, 35])
+        memberDelay_short = fuzz.trapmf(memberDelay, [5, 5, 25, 30])
+        memberDelay_normal = fuzz.trimf(memberDelay, [25, 30, 35])
         memberDelay_long = fuzz.trapmf(memberDelay, [30, 35, 45, 45])
 
         # Calculating the degree of membership Air Temperature
@@ -135,11 +135,9 @@ class AdaptiveControll:
         rule9 = np.fmin(memberAirTemperature_cool_degree, memberHumidity_moist_degree)
 
         # Mamdani Inference System
-        delay_short = np.fmax(rule1, np.fmax(rule2, rule4))
-        delay_normal = np.fmax(
-            rule3, np.fmax(rule5, np.fmax(rule6, np.fmax(rule7, rule8)))
-        )
-        delay_long = rule9
+        delay_short = np.fmax(rule1, np.fmax(rule2, rule4))  # Rule 1, 2, 4
+        delay_normal = np.fmax(rule3, np.fmax(rule5, rule7))  # Rule 3, 5, 7
+        delay_long = np.fmax(rule6, np.fmax(rule8, rule9))  # Rule 6, 8, 9
 
         activation_short = np.fmin(delay_short, memberDelay_short)
         activation_normal = np.fmin(delay_normal, memberDelay_normal)
