@@ -602,7 +602,7 @@
         "z": "4e95b77d0b966b44",
         "g": "0b1defec19e46ef8",
         "name": "Debug InfluxDB data",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -932,6 +932,7 @@
         "id": "5306464457f18e6d",
         "type": "influxdb out",
         "z": "4e95b77d0b966b44",
+        "d": true,
         "g": "51a4cf60df77cc66",
         "influxdb": "a0c6bd21a651f905",
         "name": "Save to Database",
@@ -1321,7 +1322,7 @@
                 "color": "#ffc800"
             },
             {
-                "from": "500",
+                "from": "800",
                 "color": "#5cd65c"
             },
             {
@@ -1913,6 +1914,7 @@
         "id": "afdf43bcb751f62e",
         "type": "pythonshell in",
         "z": "4e95b77d0b966b44",
+        "d": true,
         "g": "25804cb46152d20d",
         "name": "Capture Image",
         "pyfile": "/home/kohaku/aeroponics_images/autoCapture.py",
@@ -2153,6 +2155,7 @@
         "id": "208568a9a8487145",
         "type": "pythonshell in",
         "z": "4e95b77d0b966b44",
+        "d": true,
         "g": "1190b8304b39fb20",
         "name": "Training Model",
         "pyfile": "/home/kohaku/skripsi/Post/Index/training.py",
@@ -2209,6 +2212,7 @@
         "id": "823031718a380c15",
         "type": "pythonshell in",
         "z": "4e95b77d0b966b44",
+        "d": true,
         "g": "80818ea1848bc60d",
         "name": "Predict Future",
         "pyfile": "/home/kohaku/skripsi/Post/Index/predict.py",
@@ -2302,7 +2306,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "10",
+        "repeat": "5",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
@@ -2323,11 +2327,11 @@
         "z": "4e95b77d0b966b44",
         "g": "712eaa3f268f82a4",
         "name": "Compare",
-        "func": "let predict, tds, maxTDS, minTDS, pumpController, now;\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n\npumpController = flow.get(\"pumpController\")\n\nnow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\npredict = msg.payload\n\ntds = flow.get('tds')\n\nmsg.payload = managementPump(pumpController, tds, maxTDS, minTDS, predict)\n\nreturn msg;\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, predict) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        setSystem = nutrientPump(predict) + \"|\" + fertilizerPump(tdsValue, maxTDS, minTDS)\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    let status, q1, q3;\n\n    q1 = minTDS + ((maxTDS - minTDS) * 0.25)\n    q3 = minTDS + ((maxTDS - minTDS) * 0.75)\n\n    if (tdsValue < q1) {\n        status = \"0\"\n    } else if (tdsValue >= q3) {\n        status = \"1\"\n    } else {\n        status = \"1\"\n    }\n\n    flow.set(\"fertilizerPumpStatus\", status)\n\n    return status\n}\n\nfunction nutrientPump(predict) {\n    let status;\n\n    let dateNow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\n    // Modifikasi format datetime di array agar sesuai dengan format target\n    const match = predict.find(record => {\n        // Ambil substring datetime dari array hingga detik diubah menjadi \"00\"\n        const formattedDatetime = record.datetime.substring(0, 17) + \"00\";\n        return formattedDatetime === dateNow;\n    });\n\n    if (match) {\n        status = match.is_pump_not_active.toString()\n    } else {\n        status = \"1\"\n    }\n\n    flow.set(\"nutrientPumpStatus\", status)\n\n    return status\n}",
+        "func": "let predict, tds, maxTDS, minTDS, pumpController, now;\n\n// mengambil data TDS maksimal dari flow\nmaxTDS = flow.get('maxTDS');\n// mengambil data TDS minimal dari flow\nminTDS = flow.get('minTDS');\n\npumpController = flow.get(\"pumpController\")\n\nnow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\npredict = msg.payload\n\ntds = flow.get('tds')\n\nmsg.payload = managementPump(pumpController, tds, maxTDS, minTDS, predict)\n\nreturn msg;\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, predict) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        setSystem = nutrientPump(predict) + \"|\" + fertilizerPump(tdsValue, maxTDS, minTDS)\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    let status, q1, q3;\n\n    q1 = minTDS + ((maxTDS - minTDS) * 0.25)\n    q3 = minTDS + ((maxTDS - minTDS) * 0.75)\n\n    if (tdsValue < q1) {\n        status = \"0\"\n    } \n    \n    if (tdsValue >= q3) {\n        status = \"1\"\n    }\n\n    flow.set(\"fertilizerPumpStatus\", status)\n\n    return status\n}\n\nfunction nutrientPump(predict) {\n    let status;\n\n    let dateNow = moment().format(\"YYYY-MM-DD HH:mm:00\")\n\n    // Modifikasi format datetime di array agar sesuai dengan format target\n    const match = predict.find(record => {\n        // Ambil substring datetime dari array hingga detik diubah menjadi \"00\"\n        const formattedDatetime = record.datetime.substring(0, 17) + \"00\";\n        return formattedDatetime === dateNow;\n    });\n\n    if (match) {\n        status = match.is_pump_not_active.toString()\n    } else {\n        status = \"1\"\n    }\n\n    flow.set(\"nutrientPumpStatus\", status)\n\n    return status\n}",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"fertilizerPumpStatus\", \"1\")\nflow.set(\"nutrientPumpStatus\", \"1\")",
         "finalize": "",
         "libs": [
             {
