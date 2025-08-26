@@ -1,0 +1,2892 @@
+[
+    {
+        "id": "4e95b77d0b966b44",
+        "type": "tab",
+        "label": "Main",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9f88271de0797f5b",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Test MQTT Connection",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "91be976e9b0e0d02",
+            "538bc9c0cdbfc493",
+            "72112e25c8525f59",
+            "6d07ecdf31365a93"
+        ],
+        "x": 34,
+        "y": 39,
+        "w": 412,
+        "h": 162
+    },
+    {
+        "id": "0b1defec19e46ef8",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Test InfluxDB Connection",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "f3cf6106df235e62",
+            "7daa590ed0888d90",
+            "bb5aad54fc6fcf07",
+            "343655534f57b851",
+            "c5e42c44d7ebe056",
+            "1960f27e5879be7f"
+        ],
+        "x": 474,
+        "y": 39,
+        "w": 872,
+        "h": 162
+    },
+    {
+        "id": "b7ed9a5a877c4fa0",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Update Table",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e081a0eac9cd5bf3",
+            "a88c334fe13322d7",
+            "b432713c2282946f",
+            "cdab0721afc84092"
+        ],
+        "x": 34,
+        "y": 839,
+        "w": 792,
+        "h": 82,
+        "info": "# Update table each 10 second"
+    },
+    {
+        "id": "fa63ca2422965e50",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Form Input Min Max TDS",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a81cdd80fe3cbedb",
+            "2b16e450599d9bc3",
+            "94c8562cc4c33fbe",
+            "85064a10c13d8707",
+            "ea371e68a76687e4",
+            "125d46208a3ffb2e",
+            "bb11821c5851a495"
+        ],
+        "x": 34,
+        "y": 1359,
+        "w": 1252,
+        "h": 162
+    },
+    {
+        "id": "1190b8304b39fb20",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Training Schedule",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "22bdfdf9af3cec94",
+            "c572c62e3bc7d0db",
+            "309a39bb28bc71dd",
+            "6eac5edf286de247",
+            "cc26a5600ddcd1f6",
+            "308a6cb6fb763bae"
+        ],
+        "x": 34,
+        "y": 1819,
+        "w": 1032,
+        "h": 122
+    },
+    {
+        "id": "80818ea1848bc60d",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Predict Schedule",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "21a3e2fa697eda18",
+            "a980d978498775cc",
+            "c8e08e1f91d16c69",
+            "996de0f28e6af6af",
+            "bc110801e8f19e9c",
+            "b107628710264f44",
+            "12c72e6b4dd1e32a"
+        ],
+        "x": 34,
+        "y": 1959,
+        "w": 1192,
+        "h": 122
+    },
+    {
+        "id": "712eaa3f268f82a4",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Nutrient Pump Controll",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a01747745349e086",
+            "ca094501277d0b96",
+            "8f68515dcd981636",
+            "bd4895577c09d14c",
+            "4864eded0510c93b",
+            "e70f8d03f4780813",
+            "7744bc7d7b08df75",
+            "918360e32f36084b",
+            "c036512d9091eb5b",
+            "0d56e7f719e6fad1",
+            "3d6b33f27dafc38a"
+        ],
+        "x": 34,
+        "y": 1159,
+        "w": 1652,
+        "h": 182
+    },
+    {
+        "id": "cf16a34e4e3aa852",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Pump Mode (Manual / Auto)",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "966dde961a135cbd",
+            "921ffe416433df5f",
+            "35cc5b709892f231",
+            "a23d4665892c5066",
+            "1000ab7abae8be5e",
+            "f9fc7a50a612c6be"
+        ],
+        "x": 34,
+        "y": 939,
+        "w": 512,
+        "h": 202
+    },
+    {
+        "id": "51a4cf60df77cc66",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Flow Monitoring",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c0fdf13ddf51a386",
+            "77d0234d6877c108",
+            "30de823cdfad7534",
+            "5306464457f18e6d",
+            "0977c7ffa81bdbdb",
+            "406f2dd9465b79d1",
+            "f99247d62c6acf92",
+            "0d0a4e47620efe72",
+            "3a7d8b17c577e4b1",
+            "de835b840eb85878",
+            "f78f28a51c3e9c93",
+            "1848ca0b284dbcea",
+            "75a79c35353d62b9",
+            "35f17538204de772",
+            "d7956814759e929e",
+            "21d52b8cc6ca014b",
+            "48d69c5ddf12a038",
+            "0719cddf1410f446",
+            "288dfe312c2d55ea",
+            "9b50a0c178fdf348"
+        ],
+        "x": 34,
+        "y": 219,
+        "w": 1172,
+        "h": 602
+    },
+    {
+        "id": "2934f6035f0922ad",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Input Dummy Data",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "be99efa4d153a295",
+            "449b5b2e16ce58c0",
+            "3d976b5622e526c3"
+        ],
+        "x": 1374,
+        "y": 39,
+        "w": 572,
+        "h": 82
+    },
+    {
+        "id": "06eae61831951bdc",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Test Connection API",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "8633149b60e204e8",
+            "465f66281b6b658f",
+            "cb7d2411115168ce"
+        ],
+        "x": 1374,
+        "y": 139,
+        "w": 792,
+        "h": 82
+    },
+    {
+        "id": "fa17b443235582bc",
+        "type": "group",
+        "z": "4e95b77d0b966b44",
+        "name": "Capture Image",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "4739ef6f915728eb",
+            "d3d10d47d240a665",
+            "46d97e573f2dbafc",
+            "99a0bba3c65d3865",
+            "c42d31bf52f2ec03",
+            "2fc2e859d1e67326",
+            "969906504283a687",
+            "27c884c4626ae46b",
+            "8d89269836c193c6"
+        ],
+        "x": 34,
+        "y": 1539,
+        "w": 932,
+        "h": 262
+    },
+    {
+        "id": "a0c6bd21a651f905",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "InfluxDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "050fe04ae7128fb6",
+        "type": "ui-base",
+        "name": "Aeroponics",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "showPageTitle": true,
+        "navigationStyle": "default",
+        "titleBarStyle": "default"
+    },
+    {
+        "id": "413a04049733efbc",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "610463491eab5394",
+        "type": "ui-page",
+        "name": "Monitoring",
+        "ui": "050fe04ae7128fb6",
+        "path": "/monitoring",
+        "icon": "view-dashboard",
+        "layout": "grid",
+        "theme": "413a04049733efbc",
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "0754707ca88f42b4",
+        "type": "ui-group",
+        "name": "Left",
+        "page": "610463491eab5394",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ee8cff4690bbb240",
+        "type": "ui-page",
+        "name": "Controlling",
+        "ui": "050fe04ae7128fb6",
+        "path": "/controlling",
+        "icon": "cog",
+        "layout": "grid",
+        "theme": "413a04049733efbc",
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "a7b209c82b79a6cf",
+        "type": "ui-group",
+        "name": "Table",
+        "page": "ee8cff4690bbb240",
+        "width": "12",
+        "height": "1",
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "80e8d53defe00db7",
+        "type": "ui-group",
+        "name": "Controll TDS",
+        "page": "ee8cff4690bbb240",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "960921f37b3c9b31",
+        "type": "ui-group",
+        "name": "Current TDS",
+        "page": "ee8cff4690bbb240",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "928253dc2f736af4",
+        "type": "ui-group",
+        "name": "Right",
+        "page": "610463491eab5394",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ce50fe1a67b27550",
+        "type": "ui-group",
+        "name": "Bottom",
+        "page": "610463491eab5394",
+        "width": "12",
+        "height": "1",
+        "order": 3,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "ad6a52b7f270c94f",
+        "type": "ui-group",
+        "name": "Controll Pump",
+        "page": "ee8cff4690bbb240",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": false,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "95baad91265b5be6",
+        "type": "mqtt-broker",
+        "name": "Mosquitto Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5f6501cc1475b545",
+        "type": "ui-group",
+        "name": "Model Stats",
+        "page": "ee8cff4690bbb240",
+        "width": "6",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "91be976e9b0e0d02",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "9f88271de0797f5b",
+        "name": "Inject MQTT Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "72112e25c8525f59"
+            ]
+        ]
+    },
+    {
+        "id": "538bc9c0cdbfc493",
+        "type": "mqtt in",
+        "z": "4e95b77d0b966b44",
+        "g": "9f88271de0797f5b",
+        "name": "Subcribe Test",
+        "topic": "Test/Aeroponics",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "95baad91265b5be6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "6d07ecdf31365a93"
+            ]
+        ]
+    },
+    {
+        "id": "72112e25c8525f59",
+        "type": "mqtt out",
+        "z": "4e95b77d0b966b44",
+        "g": "9f88271de0797f5b",
+        "name": "Publish Test",
+        "topic": "Test/Aeroponics",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "95baad91265b5be6",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6d07ecdf31365a93",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "9f88271de0797f5b",
+        "name": "Debug Test",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f3cf6106df235e62",
+        "type": "influxdb out",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "influxdb": "a0c6bd21a651f905",
+        "name": "Insert data",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "sgh",
+        "bucket": "aeroponics",
+        "x": 830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7daa590ed0888d90",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "name": "Inject InfluxDB Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "measurement",
+                "v": "test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "6.4",
+        "payloadType": "num",
+        "x": 610,
+        "y": 80,
+        "wires": [
+            [
+                "f3cf6106df235e62"
+            ]
+        ]
+    },
+    {
+        "id": "bb5aad54fc6fcf07",
+        "type": "influxdb in",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "influxdb": "a0c6bd21a651f905",
+        "name": "Read data",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "sgh",
+        "x": 990,
+        "y": 160,
+        "wires": [
+            [
+                "343655534f57b851"
+            ]
+        ]
+    },
+    {
+        "id": "343655534f57b851",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "name": "Debug InfluxDB data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "c5e42c44d7ebe056",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "aeroponics",
+        "payload": "",
+        "payloadType": "date",
+        "x": 620,
+        "y": 160,
+        "wires": [
+            [
+                "1960f27e5879be7f"
+            ]
+        ]
+    },
+    {
+        "id": "1960f27e5879be7f",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "0b1defec19e46ef8",
+        "name": "Set Query",
+        "func": "msg.query = `\nfrom(bucket: \"aeroponics\")\n    |> range(start: -12h)\n    |> filter(fn: (r) => r._measurement == \"test\")\n`\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 160,
+        "wires": [
+            [
+                "bb5aad54fc6fcf07"
+            ]
+        ]
+    },
+    {
+        "id": "e081a0eac9cd5bf3",
+        "type": "influxdb in",
+        "z": "4e95b77d0b966b44",
+        "g": "b7ed9a5a877c4fa0",
+        "influxdb": "a0c6bd21a651f905",
+        "name": "Read",
+        "query": "from(bucket: \"aeroponics\")\n  |> range(start: -1d)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"first\")\n  |> aggregateWindow(every: 1m, fn: mean, createEmpty: false)\n  |> sort(columns: [\"_time\"], desc: true)\n  |> yield(name: \"mean\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "sgh",
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "cdab0721afc84092"
+            ]
+        ]
+    },
+    {
+        "id": "a88c334fe13322d7",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "b7ed9a5a877c4fa0",
+        "name": "Inject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 130,
+        "y": 880,
+        "wires": [
+            [
+                "e081a0eac9cd5bf3"
+            ]
+        ]
+    },
+    {
+        "id": "b432713c2282946f",
+        "type": "ui-table",
+        "z": "4e95b77d0b966b44",
+        "g": "b7ed9a5a877c4fa0",
+        "group": "a7b209c82b79a6cf",
+        "name": "Information",
+        "label": "text",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "maxrows": "50",
+        "passthru": false,
+        "autocols": true,
+        "showSearch": false,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "x": 730,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cdab0721afc84092",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "b7ed9a5a877c4fa0",
+        "name": "Format data structure",
+        "func": "let data = [];\nlet timestampMap = {};\n\nmsg.payload.forEach(function (element) {\n    let timestamp = element._time;\n    let field = element._field;\n    let value = element._value;\n\n    if (!timestampMap[timestamp]) {\n        timestampMap[timestamp] = {\n            timestamp: timestamp\n        };\n        data.push(timestampMap[timestamp]);\n    }\n\n    timestampMap[timestamp][field] = value;\n});\n\nlet transformedDataArray = data.map(data => {\n    // Create a new object with the desired field names\n    return {\n        \"timestamp\": data.timestamp,\n        \"Water Temperature\": Number(data.waterTemperature.toFixed(2)),\n        \"TDS\": Number(data.tds.toFixed(2)),\n        \"pH\": Number(data.ph.toFixed(2)),\n        \"Humidity\": Number(data.humidity.toFixed(2)),\n        \"Air Temperature\": (Number(data.airTemperature.toFixed(2))),\n        \"Fertilizer\": data.fertilizer == 1 ? \"Tersedia\" : \"Habis\",\n        \"Nutrient\": data.nutrient == 1 ? \"Tersedia\" : \"Habis\",\n        \"Nutrient Pump Status\": data.nutrientPumpStatus == 1 ? \"Aktif\" : \"Tidak Aktif\",\n        \"Fertilizer Pump Status\": data.fertilizerPumpStatus == 1 ? \"Aktif\" : \"Tidak Aktif\",\n    };\n});\n\nmsg.payload = transformedDataArray\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 880,
+        "wires": [
+            [
+                "b432713c2282946f"
+            ]
+        ]
+    },
+    {
+        "id": "c0fdf13ddf51a386",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Aeroponics",
+        "func": "let\n    data,\n    maxTDS,\n    minTDS,\n    tdsValue,\n    humidity,\n    airTemperature,\n    result,\n    arrData,\n    pumpController,\n    phValue,\n    pumpData;\n\nif (msg.topic == \"data\") {\n    arrData = msg.payload\n}\n\narrData.waterTemperature = getWaterTemperature(arrData.waterTemperature)\n\n// menghitung nilai TDS berdasarkan data dari sensor TDS\narrData.tds = getTds(arrData.tds, arrData.waterTemperature)\nflow.set('tds', arrData.tds)\n// menghitung nilai pH berdasarkan data dari sensor pH\narrData.ph = getPh(arrData.ph);\n\n// mengambil data pengontrol pompa dari context\npumpController = flow.get('pumpController');\n// mengambil data untuk mengatur pompa\npumpData = managementPump(pumpController, arrData.tds, maxTDS, minTDS, arrData.airTemperature, arrData.humidity);\n\nresult = [\n    { payload: arrData.ph, topic: \"pH\" },\n    { payload: arrData.tds, topic: \"Current TDS\" },\n    { payload: flow.get(\"maxTDS\"), topic: \"Max TDS\" },\n    { payload: flow.get(\"minTDS\"), topic: \"Min TDS\" },\n    { payload: arrData.waterTemperature, topic: \"Water Temperature\" },\n    { payload: arrData.airTemperature, topic: \"Air Temperature\" },\n    { payload: arrData.humidity, topic: \"Humidity\" },\n    { payload: arrData.fertilizer, topic: \"Fertilizer\" },\n    { payload: arrData.nutrient, topic: \"Nutrient\" },\n    { payload: arrData.fertilizerPumpStatus, topic: \"Fertilizer Pump Status\" },\n    { payload: arrData.nutrientPumpStatus, topic: \"Nutrient Pump Status\" },\n    { payload: savetoDatabase(arrData) },\n]\n\nreturn result;\n\nfunction getWaterTemperature(data) {\n    if (data === -127) {\n        return context.get('waterTemperature')\n    } else {\n        context.set('waterTemperature', data)\n\n        return data\n    }\n}\n\n/** \n * Fungsi untuk menghitung nilai TDS\n * \n * @param {number} data\n * @param {number} temperature\n*/\nfunction getTds(data, temperature) {\n    let tds;\n    \n    if (flow.get('nutrientPumpStatus') == \"0\") {\n        tds = flow.get(\"tds\")\n    } else {\n        const kValue = 0.79;\n        const aref = 3.3;\n        const adcRange = 1024;  //setting according to Gravity TDS Master library\n        const tdsFactor = 0.5;\n        let voltage = data / adcRange * aref;\n        let ecValue = (133.42 * voltage * voltage * voltage - 255.86 * voltage * voltage + 857.39 * voltage) * kValue;\n        let ec = ecValue * (1.0 + 0.02 * (temperature - 25));\n        tds = ec * tdsFactor;\n\n        tds = Math.round(tds)\n\n        flow.set(\"tds\", tds)\n    }\n\n    return tds;\n}\n\n/**\n * Fungsi untuk menghitung nilai PH\n * \n * @param {number} data\n * @return {number} ph\n */\nfunction getPh(data) {\n    // let phValue = (0.1111 * data) + 1.000\n    let phValue = (-0.01947 * data) + 7.01\n\n    return Number(phValue.toFixed(2))\n}\n\nfunction savetoDatabase(data) {\n    Object.assign(data, {\n        \"minTds\": flow.get(\"minTDS\"),\n        \"maxTds\": flow.get(\"maxTDS\")\n    })\n\n    return data\n}\n\n/**\n* Fungsi untuk mengatur pompa pupuk dan pompa cairan\n* @param {boolean} pumpController\n* @param {string} tdsValue\n* @param {string} maxTDS\n* @param {string} minTDS\n*/\nfunction managementPump(pumpController, tdsValue, maxTDS, minTDS, airTemp, humidity) {\n    let setSystem;\n    if (pumpController) {\n        // setSystem = \"1|1\";\n        setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n    } else {\n        fertilizerPump(tdsValue, maxTDS, minTDS);\n        let fertilizer = context.get('fertilizerPump');\n        let nutrient = nutrientPump(airTemp, humidity)\n        setSystem = nutrient + \"|\" + fertilizer\n    }\n    return setSystem;\n}\n\n/**\n* @param {number} tdsValue\n* @param {number} maxTDS\n* @param {number} minTDS\n*/\n\n// fungsi untuk mengatur kapan pompa pupuk harus diaktifkan atau di non aktifkan\nfunction fertilizerPump(tdsValue, maxTDS, minTDS) {\n    if (tdsValue < minTDS) {\n        context.set('fertilizerPump', 0);\n    } else if (tdsValue > maxTDS) {\n        context.set('fertilizerPump', 1);\n    }\n\n    /* let newDate = new Date()\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setTimeDecrease')) / (1000 * 60)\n    // Jika pompa tidak nyala / tds > min tds\n    if (arrData.fertilizerPumpStatus === \"0\"){\n        let differenceDecrease = Math.floor(Math.random() * (20 - 15)) + 15\n        if (diffMinute > differenceDecrease){    \n            let tds = flow.get('dummyTDS')\n            let randomNumber = Math.floor(Math.random() * 3);\n            result = tds - randomNumber\n            flow.set('dummyTDS', result)\n            context.set('setTimeDecrease', new Date())\n        }\n    // jika pompa nyala\n    } else if (arrData.fertilizerPumpStatus === \"1\"){\n        let tds = flow.get('dummyTDS')\n        let randomNumber = Math.floor(Math.random() * (10 - 5)) + 5;\n        result = tds + randomNumber\n        flow.set('dummyTDS', result)\n    } */\n}\n\n// fungsi untuk mengatur kapan pompa cairan harus diaktifkan dan dinonaktifkan\nfunction nutrientPump(airTemp, humidity) {\n    let newDate = new Date();\n    // @ts-ignore\n    let diffMinute = (newDate - context.get('setDate')) / (1000 * 60);\n    if (diffMinute < 6) {\n        return 0;\n    }\n\n    if (airTemp > 28 && humidity < 65) {\n        if (diffMinute >= 6 && diffMinute <= 15) {\n            return 1;\n        }\n\n        if (diffMinute > 15) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else if (airTemp < 25 && humidity > 78) {\n        if (diffMinute >= 6 && diffMinute <= 45) {\n            return 1;\n        }\n\n        if (diffMinute > 45) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    } else {\n        if (diffMinute >= 6 && diffMinute <= 30) {\n            return 1;\n        }\n\n        if (diffMinute > 30) {\n            context.set('setDate', new Date())\n            return 0;\n        }\n    }\n    // }\n    // if (diffMinute >= 4 && diffMinute <= 5) {\n    //     return 1;\n    // }\n\n    // if (diffMinute > 5) {\n    //     context.set('setDate', new Date())\n    //     return 0;\n    // }\n}",
+        "outputs": 12,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 540,
+        "wires": [
+            [
+                "0977c7ffa81bdbdb",
+                "406f2dd9465b79d1"
+            ],
+            [
+                "f99247d62c6acf92",
+                "0d0a4e47620efe72"
+            ],
+            [
+                "f99247d62c6acf92"
+            ],
+            [
+                "f99247d62c6acf92"
+            ],
+            [
+                "3a7d8b17c577e4b1",
+                "de835b840eb85878"
+            ],
+            [
+                "288dfe312c2d55ea"
+            ],
+            [
+                "9b50a0c178fdf348"
+            ],
+            [
+                "d7956814759e929e"
+            ],
+            [
+                "21d52b8cc6ca014b"
+            ],
+            [
+                "48d69c5ddf12a038"
+            ],
+            [
+                "0719cddf1410f446"
+            ],
+            [
+                "5306464457f18e6d"
+            ]
+        ],
+        "outputLabels": [
+            "pH",
+            "TDS",
+            "Max TDS",
+            "Min TDS",
+            "Water Temperature",
+            "Air Temperature",
+            "Humidity",
+            "Fertilizer",
+            "Nutrient",
+            "Fertilizer Pump",
+            "Nutrient Pump",
+            "Save to Database"
+        ]
+    },
+    {
+        "id": "be99efa4d153a295",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "d": true,
+        "g": "2934f6035f0922ad",
+        "name": "Trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "data",
+        "payload": "",
+        "payloadType": "str",
+        "x": 1480,
+        "y": 80,
+        "wires": [
+            [
+                "449b5b2e16ce58c0"
+            ]
+        ]
+    },
+    {
+        "id": "449b5b2e16ce58c0",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "2934f6035f0922ad",
+        "name": "Dummy Data",
+        "func": "let data\n\nfunction randomInt(min, max) {\n    let temp = Math.random() * (max - min) + min\n\n    temp = temp.toFixed(2)\n\n    return temp\n}\n\ndata = String(randomInt(0, 100.00)) + \"|\" + String(Math.round(randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")))) + \"|\" + String(randomInt(1, 14)) + \"|\" + String(randomInt(0, 100)) + \"|\" + String(randomInt(20, 40)) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1))) + \"|\" + String(Math.round(randomInt(0, 1)))\n\n// data = {\n//     'nutrientTemperature': ,\n//     'tdsReal': randomInt(flow.get(\"minTDS\"), flow.get(\"maxTDS\")),\n//     'tds': flow.get('dummyTDS'),\n//     'ph': randomInt(1, 14),\n//     'humidity': randomInt(0, 100),\n//     'airTemperature': randomInt(10, 50),\n//     'fertilizer': Math.round(randomInt(0, 1)),\n//     'nutrient': Math.round(randomInt(0, 1)),\n//     'nutrientPumpStatus': Math.round(randomInt(0, 1)),\n//     'fertilizerPumpStatus': Math.round(randomInt(0, 1)),\n// }\n\nmsg.payload = data\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1650,
+        "y": 80,
+        "wires": [
+            [
+                "3d976b5622e526c3"
+            ]
+        ]
+    },
+    {
+        "id": "77d0234d6877c108",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Set Data",
+        "func": "/* \n    Untuk memfilter data data yang tidak dapat digunakan dalam sister\n    Terdapat pesan yang masuk ke mqtt tanpa data\n */\n\n// Inisialisasi variabel\nlet data, arrData, dataSplit;\n// mengambil data dari topik AeroponicsSensor\"\nif (msg.topic == \"AeroponicsSensor\") {\n    data = msg.payload\n    msg.topic = 'data'\n}\n\n// Melakukan cek apakah datanya ada\nif (data != undefined) {\n    //Memisahkan data berdasarkan tanda |\n    dataSplit = data.split(\"|\")\n    // Cek apakah data yang diterima lengkap\n    if (dataSplit.length == 9) {\n        // Menyimpan data dalam array\n        arrData = {\n            'waterTemperature': Number(dataSplit[0]),\n            'tds': Number(dataSplit[1]),\n            'ph': Number(dataSplit[2]),\n            'humidity': Number(dataSplit[3]),\n            'airTemperature': Number(dataSplit[4]),\n            'fertilizer': Number(dataSplit[5]),\n            'nutrient': Number(dataSplit[6]),\n            'nutrientPumpStatus': Number(dataSplit[7]),\n            'fertilizerPumpStatus': Number(dataSplit[8]),\n            // 'systemControl': context.get('systemController'),\n        }\n        /* \n            Menyimpan array dalam penyimpanan sementara dengan tipe flow\n            Digunakan flow karena datanya akan digunakan pada node yang tidak terhubung dengan node ini namum masih dalam 1 flow\n         */\n        msg.payload = arrData;\n    }\n}\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\n// flow.set('dummyTDS', 1109)",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "c0fdf13ddf51a386"
+            ]
+        ]
+    },
+    {
+        "id": "30de823cdfad7534",
+        "type": "mqtt in",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Aeroponics Sensor",
+        "topic": "AeroponicsSensor",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "95baad91265b5be6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 540,
+        "wires": [
+            [
+                "77d0234d6877c108"
+            ]
+        ]
+    },
+    {
+        "id": "5306464457f18e6d",
+        "type": "influxdb out",
+        "z": "4e95b77d0b966b44",
+        "d": true,
+        "g": "51a4cf60df77cc66",
+        "influxdb": "a0c6bd21a651f905",
+        "name": "Save to Database",
+        "measurement": "first",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "sgh",
+        "bucket": "aeroponics",
+        "x": 770,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a81cdd80fe3cbedb",
+        "type": "ui-form",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "name": "Form Input Min Max DTS",
+        "group": "80e8d53defe00db7",
+        "label": "",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "options": [
+            {
+                "label": "Minimal TDS",
+                "key": "min",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Maximal TDS",
+                "key": "max",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "min": "",
+            "max": ""
+        },
+        "payload": "",
+        "submit": "Set",
+        "cancel": "clear",
+        "resetOnSubmit": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 610,
+        "y": 1440,
+        "wires": [
+            [
+                "94c8562cc4c33fbe"
+            ]
+        ]
+    },
+    {
+        "id": "2b16e450599d9bc3",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "name": "Set default value form",
+        "func": "msg.payload = {\n    min: flow.get(\"minTDS\"),\n    max: flow.get(\"maxTDS\")\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set('minTDS', 800)\nflow.set('maxTDS', 1000)",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 1440,
+        "wires": [
+            [
+                "a81cdd80fe3cbedb"
+            ]
+        ]
+    },
+    {
+        "id": "94c8562cc4c33fbe",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "name": "Parse String to Integer",
+        "func": "let maxTDS = msg.payload.max\nlet minTDS = msg.payload.min\nlet result\n\nif (typeof maxTDS === typeof \"\") {\n    maxTDS = parseInt(maxTDS)\n}\n\nif (typeof minTDS === typeof \"\") {\n    minTDS = parseInt(minTDS)\n}\n\nif (maxTDS <= minTDS) {\n    result = [\n        { payload: flow.get(\"maxTDS\"),\n        topic: \"maxTDS\" },\n        { payload: flow.get(\"minTDS\"),\n        topic: \"minTDS\" },\n        { payload: \"Value max TDS must be greater than min TDS!\" },\n    ]\n} else {\n    flow.set(\"maxTDS\", maxTDS);\n    flow.set(\"minTDS\", minTDS);\n\n    result = [\n        { payload: maxTDS },\n        { payload: minTDS },\n        {\n            payload: `Minimal TDS set to ${minTDS} <br />\n    maximum TDS set to ${maxTDS}`\n        }\n    ]\n}\n\nreturn result",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 1440,
+        "wires": [
+            [
+                "125d46208a3ffb2e"
+            ],
+            [
+                "ea371e68a76687e4"
+            ],
+            [
+                "85064a10c13d8707"
+            ]
+        ]
+    },
+    {
+        "id": "85064a10c13d8707",
+        "type": "ui-notification",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "ui": "050fe04ae7128fb6",
+        "position": "top right",
+        "colorDefault": true,
+        "color": "#000000",
+        "displayTime": "5",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Close",
+        "raw": true,
+        "className": "",
+        "name": "",
+        "x": 1150,
+        "y": 1480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea371e68a76687e4",
+        "type": "ui-text",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "group": "960921f37b3c9b31",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "Current Minimum TDS",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 1160,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "125d46208a3ffb2e",
+        "type": "ui-text",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "group": "960921f37b3c9b31",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Current Maximum TDS",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 1160,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "bb11821c5851a495",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "fa63ca2422965e50",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "30",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1440,
+        "wires": [
+            [
+                "2b16e450599d9bc3"
+            ]
+        ]
+    },
+    {
+        "id": "0977c7ffa81bdbdb",
+        "type": "ui-chart",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "group": "0754707ca88f42b4",
+        "name": "Chart pH",
+        "label": "pH",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "yAxisLabel": "",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "14",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "1",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "500",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "4",
+        "className": "",
+        "x": 740,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "406f2dd9465b79d1",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge pH",
+        "group": "0754707ca88f42b4",
+        "order": 2,
+        "width": "3",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "pH",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "5.5",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "6.5",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "14",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f99247d62c6acf92",
+        "type": "ui-chart",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "group": "928253dc2f736af4",
+        "name": "Chart TDS",
+        "label": "TDS",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "yAxisLabel": "",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "1500",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "1",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "500",
+        "colors": [
+            "#1f77b4",
+            "#ea5353",
+            "#ffc800",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "4",
+        "className": "",
+        "x": 750,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0d0a4e47620efe72",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge TDS",
+        "group": "928253dc2f736af4",
+        "order": 2,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "TDS",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": " ppm",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "800",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "1000",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "1500",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 750,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3a7d8b17c577e4b1",
+        "type": "ui-chart",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "group": "928253dc2f736af4",
+        "name": "Chart Water Temperature",
+        "label": "Water Temperature",
+        "order": 3,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "yAxisLabel": "",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "45",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": "1",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "500",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "4",
+        "className": "",
+        "x": 790,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de835b840eb85878",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge Water Temperature",
+        "group": "928253dc2f736af4",
+        "order": 4,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Water Temperature",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "°C",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "25",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "28",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 800,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "f78f28a51c3e9c93",
+        "type": "ui-chart",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "group": "0754707ca88f42b4",
+        "name": "Chart Air Temperature",
+        "label": "Air Temperature",
+        "order": 3,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "yAxisLabel": "",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "45",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "500",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "4",
+        "className": "",
+        "x": 1060,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1848ca0b284dbcea",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge Air Tempetature",
+        "group": "0754707ca88f42b4",
+        "order": 4,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Air Temperature",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "°C",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "20",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "30",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "50",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1070,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "75a79c35353d62b9",
+        "type": "ui-chart",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "group": "0754707ca88f42b4",
+        "name": "Chart Humidity",
+        "label": "Humidity",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "HH:mm",
+        "yAxisLabel": "",
+        "yAxisProperty": "",
+        "ymin": "0",
+        "ymax": "100",
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": 4,
+        "showLegend": false,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "500",
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "3",
+        "height": "4",
+        "className": "",
+        "x": 1040,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "35f17538204de772",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge Humidity",
+        "group": "0754707ca88f42b4",
+        "order": 6,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Humidity",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "%",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffc800"
+            },
+            {
+                "from": "80",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "90",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 1040,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d7956814759e929e",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge Fertilizer Detector",
+        "group": "928253dc2f736af4",
+        "order": 5,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Fertilizer Status",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "0.5",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "1",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 790,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "21d52b8cc6ca014b",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Gauge Nutrient Detector",
+        "group": "928253dc2f736af4",
+        "order": 6,
+        "width": 3,
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Nutrient Status",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "0.5",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "1",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 790,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "48d69c5ddf12a038",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Fertilizer Pump Status",
+        "group": "ce50fe1a67b27550",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Fertilizer Pump Status",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "0.5",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "1",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "0719cddf1410f446",
+        "type": "ui-gauge",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Nutrient Pump Status",
+        "group": "ce50fe1a67b27550",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Nutrient Pump Status",
+        "units": "",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c"
+            },
+            {
+                "from": "0.5",
+                "color": "#ea5353"
+            }
+        ],
+        "min": 0,
+        "max": "1",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "966dde961a135cbd",
+        "type": "ui-switch",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Switch Pump Controll",
+        "label": "Pump Mode (Manual)",
+        "group": "ad6a52b7f270c94f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "pumpControll",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 160,
+        "y": 980,
+        "wires": [
+            [
+                "921ffe416433df5f"
+            ]
+        ]
+    },
+    {
+        "id": "921ffe416433df5f",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Set Topic for Pump Controller",
+        "func": "// mengambil data dari inputan pengguna untuk menyalakan atau mematikan semua pompa dan menyimpan dalam context dengan key pumpController\nflow.set(\"pumpController\", msg.payload)",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"pumpController\", true)",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "a01747745349e086",
+        "type": "mqtt out",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Pump Controller",
+        "topic": "systemController",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "95baad91265b5be6",
+        "x": 620,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "3d976b5622e526c3",
+        "type": "mqtt out",
+        "z": "4e95b77d0b966b44",
+        "g": "2934f6035f0922ad",
+        "name": "Dummy Publish",
+        "topic": "AeroponicsSensor",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "95baad91265b5be6",
+        "x": 1840,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4739ef6f915728eb",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Trigger Pagi",
+        "props": [],
+        "repeat": "",
+        "crontab": "00 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1580,
+        "wires": [
+            [
+                "99a0bba3c65d3865"
+            ]
+        ]
+    },
+    {
+        "id": "d3d10d47d240a665",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Trigger Siang",
+        "props": [],
+        "repeat": "",
+        "crontab": "00 12 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1640,
+        "wires": [
+            [
+                "99a0bba3c65d3865"
+            ]
+        ]
+    },
+    {
+        "id": "46d97e573f2dbafc",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Trigger Sore",
+        "props": [],
+        "repeat": "",
+        "crontab": "00 16 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 1700,
+        "wires": [
+            [
+                "99a0bba3c65d3865"
+            ]
+        ]
+    },
+    {
+        "id": "35cc5b709892f231",
+        "type": "ui-switch",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Switch Nutrient Pump",
+        "label": "Activate Nutrient Pump?",
+        "group": "ad6a52b7f270c94f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "0",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "1",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 160,
+        "y": 1040,
+        "wires": [
+            [
+                "a23d4665892c5066"
+            ]
+        ]
+    },
+    {
+        "id": "a23d4665892c5066",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Set Nutrient Pump",
+        "func": "flow.set(\"nutrientPumpStatus\", msg.payload)\n",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "1000ab7abae8be5e",
+        "type": "ui-switch",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Switch Fertilizer Pump",
+        "label": "Activate Fertilizer Pump?",
+        "group": "ad6a52b7f270c94f",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "0",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "1",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "x": 160,
+        "y": 1100,
+        "wires": [
+            [
+                "f9fc7a50a612c6be"
+            ]
+        ]
+    },
+    {
+        "id": "f9fc7a50a612c6be",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "cf16a34e4e3aa852",
+        "name": "Set Fertilizer Pump",
+        "func": "flow.set(\"fertilizerPumpStatus\", msg.payload)",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "288dfe312c2d55ea",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Check Value Air Temperature",
+        "func": "// Mengecek nilai Air Temperature. \n// Jika NaN maka mengembalikan nilai 0, jika tidak maka mengembalikan nilai asli\nif (Number.isNaN(msg.payload)) {\n    msg.payload = 0;\n}\n\nflow.set(\"temperature\", msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 500,
+        "wires": [
+            [
+                "f78f28a51c3e9c93",
+                "1848ca0b284dbcea"
+            ]
+        ]
+    },
+    {
+        "id": "9b50a0c178fdf348",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "51a4cf60df77cc66",
+        "name": "Check Value Humidity",
+        "func": "// Mengecek nilai Humidity. \n// Jika NaN maka mengembalikan nilai 0, jika tidak maka mengembalikan nilai asli\nif (Number.isNaN(msg.payload)) {\n    msg.payload = 0;\n}\n\nflow.set(\"humidity\", msg.payload)\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 580,
+        "wires": [
+            [
+                "75a79c35353d62b9",
+                "35f17538204de772"
+            ]
+        ]
+    },
+    {
+        "id": "22bdfdf9af3cec94",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Trigger Training",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "30 00 * * 1,4",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"hyperparameter_tuning\":true}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 1880,
+        "wires": [
+            [
+                "309a39bb28bc71dd"
+            ]
+        ]
+    },
+    {
+        "id": "c572c62e3bc7d0db",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Training Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "21a3e2fa697eda18",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Trigger Predict",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 160,
+        "y": 2020,
+        "wires": [
+            [
+                "996de0f28e6af6af"
+            ]
+        ]
+    },
+    {
+        "id": "a980d978498775cc",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Predict Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "ca094501277d0b96",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Trigger Get Spaying Delay",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "humidity",
+                "v": "humidity",
+                "vt": "flow"
+            },
+            {
+                "p": "temperature",
+                "v": "temperature",
+                "vt": "flow"
+            },
+            {
+                "p": "datetime",
+                "v": "iso",
+                "vt": "date"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "prediction",
+        "payload": "",
+        "payloadType": "str",
+        "x": 200,
+        "y": 1220,
+        "wires": [
+            [
+                "8f68515dcd981636"
+            ]
+        ]
+    },
+    {
+        "id": "8633149b60e204e8",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "06eae61831951bdc",
+        "name": "Test Connection",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "text/html",
+                "valueValue": ""
+            }
+        ],
+        "x": 1780,
+        "y": 180,
+        "wires": [
+            [
+                "cb7d2411115168ce"
+            ]
+        ]
+    },
+    {
+        "id": "465f66281b6b658f",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "06eae61831951bdc",
+        "name": "Trigger Test Connection API",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1540,
+        "y": 180,
+        "wires": [
+            [
+                "8633149b60e204e8"
+            ]
+        ]
+    },
+    {
+        "id": "cb7d2411115168ce",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "06eae61831951bdc",
+        "name": "Debug Test Connection",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2010,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "99a0bba3c65d3865",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "API GET Capture Images",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000/capture-image",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 1640,
+        "wires": [
+            [
+                "2fc2e859d1e67326"
+            ]
+        ]
+    },
+    {
+        "id": "c42d31bf52f2ec03",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Debug Capture Images",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "2fc2e859d1e67326",
+        "type": "json",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 1640,
+        "wires": [
+            [
+                "c42d31bf52f2ec03"
+            ]
+        ]
+    },
+    {
+        "id": "309a39bb28bc71dd",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000/train",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 370,
+        "y": 1880,
+        "wires": [
+            [
+                "6eac5edf286de247"
+            ]
+        ]
+    },
+    {
+        "id": "6eac5edf286de247",
+        "type": "json",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 530,
+        "y": 1880,
+        "wires": [
+            [
+                "c572c62e3bc7d0db",
+                "308a6cb6fb763bae"
+            ]
+        ]
+    },
+    {
+        "id": "cc26a5600ddcd1f6",
+        "type": "ui-text",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "group": "5f6501cc1475b545",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Training Duration",
+        "label": "Training Duration",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 950,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "308a6cb6fb763bae",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "1190b8304b39fb20",
+        "name": "Get Training Duration",
+        "func": "msg.payload = msg.payload.duration\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1900,
+        "wires": [
+            [
+                "cc26a5600ddcd1f6"
+            ]
+        ]
+    },
+    {
+        "id": "c8e08e1f91d16c69",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000/predict",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 550,
+        "y": 2020,
+        "wires": [
+            [
+                "bc110801e8f19e9c"
+            ]
+        ]
+    },
+    {
+        "id": "996de0f28e6af6af",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Get start_date",
+        "func": "msg.payload ={\n    \"start_date\": msg.payload\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 2020,
+        "wires": [
+            [
+                "c8e08e1f91d16c69"
+            ]
+        ]
+    },
+    {
+        "id": "bc110801e8f19e9c",
+        "type": "json",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 710,
+        "y": 2020,
+        "wires": [
+            [
+                "a980d978498775cc",
+                "b107628710264f44"
+            ]
+        ]
+    },
+    {
+        "id": "b107628710264f44",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "name": "Get Predict Duration",
+        "func": "msg.payload = msg.payload.duration\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 2040,
+        "wires": [
+            [
+                "12c72e6b4dd1e32a"
+            ]
+        ]
+    },
+    {
+        "id": "12c72e6b4dd1e32a",
+        "type": "ui-text",
+        "z": "4e95b77d0b966b44",
+        "g": "80818ea1848bc60d",
+        "group": "5f6501cc1475b545",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Predict Duration",
+        "label": "Prediction Duration",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 1120,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "969906504283a687",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Trigger Get Latest Image",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 190,
+        "y": 1760,
+        "wires": [
+            [
+                "27c884c4626ae46b"
+            ]
+        ]
+    },
+    {
+        "id": "27c884c4626ae46b",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "API GET Latest Image",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000/latest-image",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 440,
+        "y": 1760,
+        "wires": [
+            [
+                "8d89269836c193c6"
+            ]
+        ]
+    },
+    {
+        "id": "8d89269836c193c6",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "fa17b443235582bc",
+        "name": "Debug Latest Images",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "8f68515dcd981636",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Get Air Temperature & Humidity",
+        "func": "let status;\nlet startPump = flow.get(\"datetimeNextGetSprayingDelay\");\nlet startPumpDate;\n\nmsg.payload = {\n    temperature: msg.temperature,\n    humidity: msg.humidity\n};\n\nif (startPump) {\n    startPumpDate = new Date(startPump);\n    startPumpDate.setSeconds(0, 0)\n} else {\n    msg.status = 1;\n\n    return msg;\n}\n\nlet currentDate = new Date(msg.datetime);\n// let currentDate = startPumpDate\ncurrentDate.setSeconds(0, 0)\nmsg.datetime = currentDate;\n\nlet diff = startPumpDate.getTime() - currentDate.getTime();\n\nif (diff > 0) {\n    msg.diff = diff / 1000 / 60\n\n    msg.status = 0\n} else {\n    msg.status = 1\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1220,
+        "wires": [
+            [
+                "bd4895577c09d14c"
+            ]
+        ]
+    },
+    {
+        "id": "bd4895577c09d14c",
+        "type": "switch",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Switch",
+        "property": "status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 1220,
+        "wires": [
+            [
+                "4864eded0510c93b"
+            ],
+            [
+                "e70f8d03f4780813"
+            ]
+        ]
+    },
+    {
+        "id": "4864eded0510c93b",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Debug Status is False",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "e70f8d03f4780813",
+        "type": "http request",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "POST Spraying Delay",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.0.188:5000/delay-spray",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 880,
+        "y": 1240,
+        "wires": [
+            [
+                "c036512d9091eb5b"
+            ]
+        ]
+    },
+    {
+        "id": "7744bc7d7b08df75",
+        "type": "debug",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Debug Delay",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.delay",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1570,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "918360e32f36084b",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Set Next Start POST Spraying Delay",
+        "func": "// Get delay\nlet delay = msg.payload.delay;\n\n// Get datetime now, set seconds to 00\nlet dateObject = new Date(msg.datetime);\ndateObject.setSeconds(0, 0);\nmsg.datetime = dateObject.toISOString();\n\n// Set datetime nutrient pump will active\ndateObject.setMinutes(dateObject.getMinutes() + delay);\nflow.set(\"datetimeNutrientSpray\", dateObject.toISOString())\n\n// Set datetime next get delay\ndateObject.setMinutes(dateObject.getMinutes() + 5)\nflow.set(\"datetimeNextGetSprayingDelay\", dateObject.toISOString())\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 1240,
+        "wires": [
+            [
+                "7744bc7d7b08df75"
+            ]
+        ]
+    },
+    {
+        "id": "c036512d9091eb5b",
+        "type": "json",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1070,
+        "y": 1240,
+        "wires": [
+            [
+                "918360e32f36084b"
+            ]
+        ]
+    },
+    {
+        "id": "0d56e7f719e6fad1",
+        "type": "inject",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Trigger Pump",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "datetime",
+                "v": "iso",
+                "vt": "date"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "prediction",
+        "payload": "",
+        "payloadType": "str",
+        "x": 160,
+        "y": 1300,
+        "wires": [
+            [
+                "3d6b33f27dafc38a"
+            ]
+        ]
+    },
+    {
+        "id": "3d6b33f27dafc38a",
+        "type": "function",
+        "z": "4e95b77d0b966b44",
+        "g": "712eaa3f268f82a4",
+        "name": "Function Controll Pump",
+        "func": "let setSystem;\nlet pumpController = flow.get(\"pumpController\")\nlet tdsValue = flow.get(\"tds\")\nlet maxTDS = flow.get(\"maxTDS\")\nlet minTDS = flow.get(\"minTDS\")\n\nif (pumpController) {\n    // setSystem = \"1|1\";\n    setSystem = flow.get(\"nutrientPumpStatus\") + \"|\" + flow.get(\"fertilizerPumpStatus\")\n} else {\n    let fertilizer = fertilizerPump(tdsValue, maxTDS, minTDS);\n    let nutrient = nutrientPump()\n    setSystem = nutrient + \"|\" + fertilizer\n}\n\nmsg.payload = setSystem;\n\nreturn msg;\n\nfunction fertilizerPump(tds, maxTDS, minTDS) {\n    let quartileValue = ((maxTDS - minTDS) / 4);\n    let q1 = minTDS + quartileValue\n    let q3 = maxTDS - quartileValue\n\n    if (tds < q1) {\n        context.set(\"fertilizerValue\", 0)\n    } else if (tds > q3) {\n        context.set(\"fertilizerValue\", 1)\n    }\n\n    let prevValue = context.get(\"fertilizerValue\")\n\n    return prevValue\n}\n\nfunction nutrientPump() {\n    let nutrientDate = flow.get(\"datetimeNutrientSpray\")\n    let nextDate = flow.get(\"datetimeNextGetSprayingDelay\")\n    let nutrientDateObject;\n    let nextDateObject;\n\n    if (nutrientDate || nextDate) {\n        nutrientDateObject = new Date(nutrientDate)\n        nutrientDateObject.setSeconds(0, 0)\n\n        nextDateObject = new Date(nextDate)\n        nextDateObject.setSeconds(0, 0)\n    } else {\n        return 1\n    }\n\n    let currentDate = new Date(msg.datetime)\n    currentDate.setSeconds(0, 0)\n\n    if (nutrientDateObject < currentDate && currentDate < nextDateObject) {\n        return 0\n    } \n\n    return 1\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\ncontext.set(\"fertilizerValue\", 0)",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 1300,
+        "wires": [
+            [
+                "a01747745349e086"
+            ]
+        ]
+    }
+]

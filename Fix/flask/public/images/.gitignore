@@ -1,0 +1,10 @@
+# Ignore images in this directory
+# This file is used to prevent Git from tracking image files in this directory.
+# Add any specific image file types you want to ignore below.
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.svg
+*.webp
